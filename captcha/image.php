@@ -1,6 +1,9 @@
 <?php
 
-//Start the session so we can store what the security code actually is
+/*
+ * Tecflare Corporation Property
+ */
+
 session_start();
 
 //Send a generated image to the browser

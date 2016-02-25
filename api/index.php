@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 $key = 'AB2';
 include '../api_keys.php';
 $public_verify = $_GET['public'];

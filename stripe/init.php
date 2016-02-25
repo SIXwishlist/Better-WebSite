@@ -1,6 +1,9 @@
 <?php
 
-// Stripe singleton
+/*
+ * Tecflare Corporation Property
+ */
+
 require dirname(__FILE__).'/lib/Stripe.php';
 
 // Utilities

@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 include 'functions/checkLogin.php';
 include 'functions/getfile.php';
 include 'functions/head.php';

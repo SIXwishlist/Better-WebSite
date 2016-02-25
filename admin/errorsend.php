@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * Tecflare Corporation Property
+ */
+
 /**
  * Singleton-style wrapper around RollbarNotifier.
  *

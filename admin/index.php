@@ -43,16 +43,16 @@ error_reporting(0);
           <?php
 
       } elseif (isset($_GET['error']) && $_GET['error'] == 2) {
-    ?>
+          ?>
 <div class="alert alert-danger" role="alert">Alert! Install folder needs to be deleted.</div>
 <?php
 
-} else {
-    ?>
+      } else {
+          ?>
       <div class="alert alert-info" role="alert">Please login to enter the control panel.</div>
       <?php
 
-}
+      }
       ?>
        <form method="POST" action="validate.php">
      <div class="input-group">

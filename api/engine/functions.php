@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 class Blog
 {
     public function add_post($name, $value, $author)
