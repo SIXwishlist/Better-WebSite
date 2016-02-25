@@ -2,7 +2,7 @@
 
 **Script Not Maintained Anymore We are moving to poKe**
 
-
+[![Build Status](http://tecflare.com:10000/job/multiSite-dev-project/2/badge/icon)](http://tecflare.com:10000/job/multiSite-dev-project/2/)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Tecflare-Corporation/mSite?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Build Status](https://travis-ci.org/Tecflare-Corporation/mSite.svg?branch=master)](https://travis-ci.org/Tecflare-Corporation/mSite)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/80d424e7f98749549cc314b4fc827abd)](https://www.codacy.com/app/dodiaraculus/mSite)
