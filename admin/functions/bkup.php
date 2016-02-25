@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 function newbkupgetit_encoder($filev, $folder)
 {
     // Get real path for our folder

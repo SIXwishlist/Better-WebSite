@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 function sendmessage($to, $subject, $r)
 {
     $headers = 'From: '.strip_tags('Automated@tecflare.com')."\r\n";

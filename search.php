@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 if (!isset($testmode)) {
     include 'theme/head.php';
     echo '';

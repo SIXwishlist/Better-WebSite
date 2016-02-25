@@ -1,5 +1,10 @@
 <?php
-  include 'functions/checkLogin.php';
+
+/*
+ * Tecflare Corporation Property
+ */
+
+include 'functions/checkLogin.php';
   include '../config.php';
         $conn = new mysqli($hostname, $usename, $password, $database);
 $sql = "DELETE FROM Storage WHERE id='".$_GET['file']."'";

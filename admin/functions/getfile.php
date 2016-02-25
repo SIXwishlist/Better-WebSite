@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 function mc_encrypt($encrypt, $key)
 {
     $encrypt = serialize($encrypt);

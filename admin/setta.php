@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 include 'functions/checkLogin.php';
 $stylefile = '../styles/'.$_POST['theme'];
 

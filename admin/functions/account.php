@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 include '../config.php';
 include 'functions/master.php';
 if (!passwordcheck($_POST['password'])) {

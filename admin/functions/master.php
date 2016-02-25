@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 function passwordcheck($passworda)
 {
     $r1 = '/[A-Z]/';  //Uppercase

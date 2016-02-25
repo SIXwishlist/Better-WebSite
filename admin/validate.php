@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 session_start();
 error_reporting(0);
 include '../config.php';

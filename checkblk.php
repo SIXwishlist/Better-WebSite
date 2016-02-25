@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 error_reporting(0);
 include 'config.php';
 $conn = new mysqli($hostname, $usename, $password, $database);

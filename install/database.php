@@ -1,10 +1,7 @@
 <?php
 
 /*
- * Tecflare Corporation
- * Copyright Tecflare Corporation
- * Provided by the Tecflare Corporation System
- * * Code has been scanned by styleci.io
+ * Tecflare Corporation Property
  */
 
 $host = $_POST['hostname'];

@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 include '../config.php';
 include 'functions/sendmail.php';
 $con = mysqli_connect($hostname, $usename, $password, $database);

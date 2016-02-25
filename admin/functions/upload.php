@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 if (!isset($testmode)) {
     error_reporting(0);
     include '../config.php';

@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 define('PLUGINS_FOLDER', '../plugins/');
 class Phphooks
 {
