@@ -1,7 +1,7 @@
 # Tecflare Poke
 
 [![StyleCI](https://styleci.io/repos/52529036/shield)](https://styleci.io/repos/52529036)
-[!http://tecflare.com:10000/job/multiSite-dev-project/badge/icon!|http://tecflare.com:10000/job/multiSite-dev-project/]
+[![Build Status](http://tecflare.com:10000/job/multiSite-dev-project/badge/icon)](http://tecflare.com:10000/job/multiSite-dev-project/)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Tecflare-Corporation/mSite?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/80d424e7f98749549cc314b4fc827abd)](https://www.codacy.com/app/dodiaraculus/mSite)
 
