@@ -9,24 +9,24 @@ class StripeObject implements ArrayAccess, JsonSerializable
 {
     /**
      * @var Util\Set Attributes that should not be sent to the API because
-     *    they're not updatable (e.g. API key, ID).
+     *               they're not updatable (e.g. API key, ID).
      */
     public static $permanentAttributes;
     /**
      * @var Util\Set Attributes that are nested but still updatable from
-     *    the parent class's URL (e.g. metadata).
+     *               the parent class's URL (e.g. metadata).
      */
     public static $nestedUpdatableAttributes;
 
     public static function init()
     {
-        self::$permanentAttributes = new Util\Set(array('_opts', 'id'));
-        self::$nestedUpdatableAttributes = new Util\Set(array(
+        self::$permanentAttributes = new Util\Set(['_opts', 'id']);
+        self::$nestedUpdatableAttributes = new Util\Set([
             'metadata', 'legal_entity', 'address', 'dob', 'transfer_schedule', 'verification',
             'tos_acceptance', 'personal_address',
             // will make the array into an AttachedObject: weird, but works for now
-            'additional_owners', 0, 1, 2, 3, 4 // Max 3, but leave the 4th so errors work properly
-        ));
+            'additional_owners', 0, 1, 2, 3, 4, // Max 3, but leave the 4th so errors work properly
+        ]);
     }
 
     protected $_opts;
@@ -38,11 +38,11 @@ class StripeObject implements ArrayAccess, JsonSerializable
     public function __construct($id = null, $opts = null)
     {
         $this->_opts = $opts ? $opts : new Util\RequestOptions();
-        $this->_values = array();
+        $this->_values = [];
         $this->_unsavedValues = new Util\Set();
         $this->_transientValues = new Util\Set();
 
-        $this->_retrieveOptions = array();
+        $this->_retrieveOptions = [];
         if (is_array($id)) {
             foreach ($id as $key => $value) {
                 if ($key != 'id') {
@@ -60,7 +60,7 @@ class StripeObject implements ArrayAccess, JsonSerializable
     // Standard accessor magic methods
     public function __set($k, $v)
     {
-        if ($v === "") {
+        if ($v === '') {
             throw new InvalidArgumentException(
                 'You cannot set \''.$k.'\'to an empty string. '
                 .'We interpret empty strings as NULL in requests. '
@@ -84,32 +84,36 @@ class StripeObject implements ArrayAccess, JsonSerializable
     {
         return isset($this->_values[$k]);
     }
+
     public function __unset($k)
     {
         unset($this->_values[$k]);
         $this->_transientValues->add($k);
         $this->_unsavedValues->discard($k);
     }
+
     public function &__get($k)
     {
         // function should return a reference, using $nullval to return a reference to null
         $nullval = null;
         if (array_key_exists($k, $this->_values)) {
             return $this->_values[$k];
-        } else if ($this->_transientValues->includes($k)) {
+        } elseif ($this->_transientValues->includes($k)) {
             $class = get_class($this);
-            $attrs = join(', ', array_keys($this->_values));
+            $attrs = implode(', ', array_keys($this->_values));
             $message = "Stripe Notice: Undefined property of $class instance: $k. "
-                    . "HINT: The $k attribute was set in the past, however. "
-                    . "It was then wiped when refreshing the object "
-                    . "with the result returned by Stripe's API, "
-                    . "probably as a result of a save(). The attributes currently "
-                    . "available on this object are: $attrs";
+                    ."HINT: The $k attribute was set in the past, however. "
+                    .'It was then wiped when refreshing the object '
+                    ."with the result returned by Stripe's API, "
+                    .'probably as a result of a save(). The attributes currently '
+                    ."available on this object are: $attrs";
             error_log($message);
+
             return $nullval;
         } else {
             $class = get_class($this);
             error_log("Stripe Notice: Undefined property of $class instance: $k");
+
             return $nullval;
         }
     }
@@ -129,6 +133,7 @@ class StripeObject implements ArrayAccess, JsonSerializable
     {
         unset($this->$k);
     }
+
     public function offsetGet($k)
     {
         return array_key_exists($k, $this->_values) ? $this->_values[$k] : null;
@@ -140,7 +145,7 @@ class StripeObject implements ArrayAccess, JsonSerializable
     }
 
     /**
-     * This unfortunately needs to be public to be used in Util\Util
+     * This unfortunately needs to be public to be used in Util\Util.
      *
      * @param array $values
      * @param array $opts
@@ -151,6 +156,7 @@ class StripeObject implements ArrayAccess, JsonSerializable
     {
         $obj = new static(isset($values['id']) ? $values['id'] : null);
         $obj->refreshFrom($values, $opts);
+
         return $obj;
     }
 
@@ -159,7 +165,7 @@ class StripeObject implements ArrayAccess, JsonSerializable
      *
      * @param array $values
      * @param array $opts
-     * @param boolean $partial Defaults to false.
+     * @param bool  $partial Defaults to false.
      */
     public function refreshFrom($values, $opts, $partial = false)
     {
@@ -200,11 +206,11 @@ class StripeObject implements ArrayAccess, JsonSerializable
 
     /**
      * @return array A recursive mapping of attributes to values for this object,
-     *    including the proper value for deleted attributes.
+     *               including the proper value for deleted attributes.
      */
     public function serializeParameters()
     {
-        $params = array();
+        $params = [];
         if ($this->_unsavedValues) {
             foreach ($this->_unsavedValues->toArray() as $k) {
                 $v = $this->$k;
@@ -219,7 +225,7 @@ class StripeObject implements ArrayAccess, JsonSerializable
         // Get nested updates.
         foreach (self::$nestedUpdatableAttributes->toArray() as $property) {
             if (isset($this->$property)) {
-                if ($this->$property instanceof StripeObject) {
+                if ($this->$property instanceof self) {
                     $serialized = $this->$property->serializeParameters();
                     if ($serialized) {
                         $params[$property] = $serialized;
@@ -248,7 +254,8 @@ class StripeObject implements ArrayAccess, JsonSerializable
     public function __toString()
     {
         $class = get_class($this);
-        return $class . ' JSON: ' . $this->__toJSON();
+
+        return $class.' JSON: '.$this->__toJSON();
     }
 
     public function __toArray($recursive = false)

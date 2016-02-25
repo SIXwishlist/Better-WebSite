@@ -55,7 +55,7 @@ class CustomerTest extends TestCase
 
     public function testUpdateDescriptionNull()
     {
-        $customer = self::createTestCustomer(array('description' => 'foo bar'));
+        $customer = self::createTestCustomer(['description' => 'foo bar']);
         $customer->description = null;
 
         $customer->save();
@@ -108,7 +108,7 @@ class CustomerTest extends TestCase
         $customer->metadata['shirt size'] = 'XS';
         $customer->save();
 
-        $customer->metadata = array('shirt size' => 'XL');
+        $customer->metadata = ['shirt size' => 'XL'];
         $customer->save();
 
         $updatedCustomer = Customer::retrieve($customer->id);
@@ -128,16 +128,16 @@ class CustomerTest extends TestCase
 
     public function testCancelSubscription()
     {
-        $planID = 'gold-' . self::generateRandomString(20);
+        $planID = 'gold-'.self::generateRandomString(20);
         self::retrieveOrCreatePlan($planID);
 
         $customer = self::createTestCustomer(
-            array(
+            [
                 'plan' => $planID,
-            )
+            ]
         );
 
-        $customer->cancelSubscription(array('at_period_end' => true));
+        $customer->cancelSubscription(['at_period_end' => true]);
         $this->assertSame($customer->subscription->status, 'active');
         $this->assertTrue($customer->subscription->cancel_at_period_end);
         $customer->cancelSubscription();
@@ -147,22 +147,21 @@ class CustomerTest extends TestCase
     public function testCustomerAddCard()
     {
         $token = Token::create(
-            array("card" => array(
-                "number" => "4242424242424242",
-                "exp_month" => 5,
-                "exp_year" => date('Y') + 3,
-                "cvc" => "314"
-            ))
+            ['card' => [
+                'number'    => '4242424242424242',
+                'exp_month' => 5,
+                'exp_year'  => date('Y') + 3,
+                'cvc'       => '314',
+            ]]
         );
 
         $customer = $this->createTestCustomer();
-        $createdCard = $customer->sources->create(array("card" => $token->id));
+        $createdCard = $customer->sources->create(['card' => $token->id]);
         $customer->save();
 
         $updatedCustomer = Customer::retrieve($customer->id);
         $updatedCards = $updatedCustomer->sources->all();
-        $this->assertSame(count($updatedCards["data"]), 2);
-
+        $this->assertSame(count($updatedCards['data']), 2);
     }
 
     public function testCustomerUpdateCard()
@@ -171,35 +170,35 @@ class CustomerTest extends TestCase
         $customer->save();
 
         $sources = $customer->sources->all();
-        $this->assertSame(count($sources["data"]), 1);
+        $this->assertSame(count($sources['data']), 1);
 
         $card = $sources['data'][0];
-        $card->name = "Jane Austen";
+        $card->name = 'Jane Austen';
         $card->save();
 
         $updatedCustomer = Customer::retrieve($customer->id);
         $updatedCards = $updatedCustomer->sources->all();
-        $this->assertSame($updatedCards["data"][0]->name, "Jane Austen");
+        $this->assertSame($updatedCards['data'][0]->name, 'Jane Austen');
     }
 
     public function testCustomerDeleteCard()
     {
         $token = Token::create(
-            array("card" => array(
-                "number" => "4242424242424242",
-                "exp_month" => 5,
-                "exp_year" => date('Y') + 3,
-                "cvc" => "314"
-            ))
+            ['card' => [
+                'number'    => '4242424242424242',
+                'exp_month' => 5,
+                'exp_year'  => date('Y') + 3,
+                'cvc'       => '314',
+            ]]
         );
 
         $customer = $this->createTestCustomer();
-        $createdCard = $customer->sources->create(array("card" => $token->id));
+        $createdCard = $customer->sources->create(['card' => $token->id]);
         $customer->save();
 
         $updatedCustomer = Customer::retrieve($customer->id);
         $updatedCards = $updatedCustomer->sources->all();
-        $this->assertSame(count($updatedCards["data"]), 2);
+        $this->assertSame(count($updatedCards['data']), 2);
 
         $deleteStatus = $updatedCustomer->sources->retrieve($createdCard->id)->delete();
         $this->assertTrue($deleteStatus->deleted);
@@ -207,29 +206,28 @@ class CustomerTest extends TestCase
 
         $postDeleteCustomer = Customer::retrieve($customer->id);
         $postDeleteCards = $postDeleteCustomer->sources->all();
-        $this->assertSame(count($postDeleteCards["data"]), 1);
+        $this->assertSame(count($postDeleteCards['data']), 1);
     }
 
     public function testCustomerAddSource()
     {
         self::authorizeFromEnv();
         $token = Token::create(
-            array("card" => array(
-                "number" => "4242424242424242",
-                "exp_month" => 5,
-                "exp_year" => date('Y') + 3,
-                "cvc" => "314"
-            ))
+            ['card' => [
+                'number'    => '4242424242424242',
+                'exp_month' => 5,
+                'exp_year'  => date('Y') + 3,
+                'cvc'       => '314',
+            ]]
         );
 
         $customer = $this->createTestCustomer();
-        $createdSource = $customer->sources->create(array("source" => $token->id));
+        $createdSource = $customer->sources->create(['source' => $token->id]);
         $customer->save();
 
         $updatedCustomer = Customer::retrieve($customer->id);
         $updatedSources = $updatedCustomer->sources->all();
-        $this->assertSame(count($updatedSources["data"]), 2);
-
+        $this->assertSame(count($updatedSources['data']), 2);
     }
 
     public function testCustomerUpdateSource()
@@ -238,36 +236,36 @@ class CustomerTest extends TestCase
         $customer->save();
 
         $sources = $customer->sources->all();
-        $this->assertSame(count($sources["data"]), 1);
+        $this->assertSame(count($sources['data']), 1);
 
         $source = $sources['data'][0];
-        $source->name = "Jane Austen";
+        $source->name = 'Jane Austen';
         $source->save();
 
         $updatedCustomer = Customer::retrieve($customer->id);
         $updatedSources = $updatedCustomer->sources->all();
-        $this->assertSame($updatedSources["data"][0]->name, "Jane Austen");
+        $this->assertSame($updatedSources['data'][0]->name, 'Jane Austen');
     }
 
     public function testCustomerDeleteSource()
     {
         self::authorizeFromEnv();
         $token = Token::create(
-            array("card" => array(
-                "number" => "4242424242424242",
-                "exp_month" => 5,
-                "exp_year" => date('Y') + 3,
-                "cvc" => "314"
-            ))
+            ['card' => [
+                'number'    => '4242424242424242',
+                'exp_month' => 5,
+                'exp_year'  => date('Y') + 3,
+                'cvc'       => '314',
+            ]]
         );
 
         $customer = $this->createTestCustomer();
-        $createdSource = $customer->sources->create(array("source" => $token->id));
+        $createdSource = $customer->sources->create(['source' => $token->id]);
         $customer->save();
 
         $updatedCustomer = Customer::retrieve($customer->id);
         $updatedSources = $updatedCustomer->sources->all();
-        $this->assertSame(count($updatedSources["data"]), 2);
+        $this->assertSame(count($updatedSources['data']), 2);
 
         $deleteStatus = $updatedCustomer->sources->retrieve($createdSource->id)->delete();
         $this->assertTrue($deleteStatus->deleted);
@@ -275,6 +273,6 @@ class CustomerTest extends TestCase
 
         $postDeleteCustomer = Customer::retrieve($customer->id);
         $postDeleteSources = $postDeleteCustomer->sources->all();
-        $this->assertSame(count($postDeleteSources["data"]), 1);
+        $this->assertSame(count($postDeleteSources['data']), 1);
     }
 }

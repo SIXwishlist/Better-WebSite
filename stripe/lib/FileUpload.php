@@ -15,7 +15,7 @@ class FileUpload extends ApiResource
     }
 
     /**
-     * @param string $id The ID of the file upload to retrieve.
+     * @param string            $id   The ID of the file upload to retrieve.
      * @param array|string|null $opts
      *
      * @return FileUpload
@@ -26,7 +26,7 @@ class FileUpload extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $opts
      *
      * @return FileUpload The created file upload.
@@ -37,7 +37,7 @@ class FileUpload extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $opts
      *
      * @return Collection of FileUploads

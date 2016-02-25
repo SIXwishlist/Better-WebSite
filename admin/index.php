@@ -37,22 +37,22 @@ error_reporting(0);
   <div class="panel-body">
       <h1>Authentication <small>Entering Control Panel</small></h1>
       <?php
-      if (isset($_GET["error"]) && $_GET["error"] == 1)
-      {
+      if (isset($_GET['error']) && $_GET['error'] == 1) {
           ?>
           <div class="alert alert-danger" role="alert">Incorrect Usename or Password.</div>
           <?php
-}
-elseif (isset($_GET["error"]) && $_GET["error"] == 2)
-{
-?>
+
+      } elseif (isset($_GET['error']) && $_GET['error'] == 2) {
+    ?>
 <div class="alert alert-danger" role="alert">Alert! Install folder needs to be deleted.</div>
 <?php
-      } else {
-      ?>
+
+} else {
+    ?>
       <div class="alert alert-info" role="alert">Please login to enter the control panel.</div>
       <?php
-      }
+
+}
       ?>
        <form method="POST" action="validate.php">
      <div class="input-group">

@@ -1,13 +1,12 @@
 <?php
 error_reporting(0);
-include("functions/checkLogin.php");
-include("../config.php");
-include("functions/head.php");
+include 'functions/checkLogin.php';
+include '../config.php';
+include 'functions/head.php';
 ?>
 <?php
-if (!isset($_GET["n"]))
-{
-  ?>
+if (!isset($_GET['n'])) {
+    ?>
 <div class="page-header">
 <h1>Accounts</h1>
 </div>
@@ -22,41 +21,38 @@ if (!isset($_GET["n"]))
     </thead>
     <tbody>
            <?php
-$con=mysqli_connect($hostname,$usename,$password,$database);
-$sql="SELECT * FROM Administrators";
+$con = mysqli_connect($hostname, $usename, $password, $database);
+    $sql = 'SELECT * FROM Administrators';
 
-if ($result=mysqli_query($con,$sql))
-  {
-  // Fetch one and one row
-  while ($row=mysqli_fetch_row($result))
-    {
-    echo '
+    if ($result = mysqli_query($con, $sql)) {
+        // Fetch one and one row
+  while ($row = mysqli_fetch_row($result)) {
+      echo '
           <tr>';
-          if ($_SESSION["usename"] == $row[1])
-          {
-            echo '<td></td>';
-          } else {
-        echo '<td><a href="deleteusr.php?usr=' . $row[0] . '">Delete</a></td>';
-          }
-        
-        echo '<td>' . $row[1] . '<td>
+      if ($_SESSION['usename'] == $row[1]) {
+          echo '<td></td>';
+      } else {
+          echo '<td><a href="deleteusr.php?usr='.$row[0].'">Delete</a></td>';
+      }
+
+      echo '<td>'.$row[1].'<td>
       </tr>
     ';
-    }
+  }
   // Free result set
   mysqli_free_result($result);
-}
+    }
 
-mysqli_close($con);
-?> 
+    mysqli_close($con);
+    ?> 
 </tbody>
   </table>
   </div>
 </div>
 <?php
-}
-else {
-  ?>
+
+} else {
+    ?>
   <div class="page-header">
 <h1>Add User</h1>
 </div>
@@ -72,8 +68,9 @@ else {
 <input type="submit" class="btn btn-info" value="Create" role="button">
 </form>
   <?php
+
 }
 ?>
 <?php
-include("functions/footer.php");
+include 'functions/footer.php';
 ?>

@@ -1,6 +1,6 @@
 <?php
-include("functions/checkLogin.php");
-include("functions/head.php");
+include 'functions/checkLogin.php';
+include 'functions/head.php';
 ?>
 <div class="row">
     <div class="col-sm-4" style="background-color:darkblue;">
@@ -24,5 +24,5 @@ include("functions/head.php");
   </div>
   </div>
 <?php
-include("functions/footer.php");
+include 'functions/footer.php';
 ?>

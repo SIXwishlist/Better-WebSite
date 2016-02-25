@@ -6,9 +6,9 @@ class RateLimitErrorTest extends TestCase
 {
     private function rateLimitErrorResponse()
     {
-        return array(
-            'error' => array(),
-        );
+        return [
+            'error' => [],
+        ];
     }
 
     /**
@@ -16,7 +16,7 @@ class RateLimitErrorTest extends TestCase
      */
     public function testRateLimit()
     {
-        $this->mockRequest('GET', '/v1/accounts/acct_DEF', array(), $this->rateLimitErrorResponse(), 429);
+        $this->mockRequest('GET', '/v1/accounts/acct_DEF', [], $this->rateLimitErrorResponse(), 429);
         Account::retrieve('acct_DEF');
     }
 }

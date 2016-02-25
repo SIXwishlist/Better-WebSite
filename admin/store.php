@@ -1,12 +1,11 @@
 <?php
-include("functions/checkLogin.php");
-include("../config.php");
-include("functions/head.php");
+include 'functions/checkLogin.php';
+include '../config.php';
+include 'functions/head.php';
 ?>
 <?php
-if (!isset($_GET["n"]))
-{
-?>
+if (!isset($_GET['n'])) {
+    ?>
 <div class="page-header">
 <h1>Store</h1>
 </div>
@@ -22,28 +21,26 @@ if (!isset($_GET["n"]))
     </thead>
     <tbody>
       <?php
-$con=mysqli_connect($hostname,$usename,$password,$database);
-$sql="SELECT * FROM Items";
+$con = mysqli_connect($hostname, $usename, $password, $database);
+    $sql = 'SELECT * FROM Items';
 
-if ($result=mysqli_query($con,$sql))
-  {
-  // Fetch one and one row
-  while ($row=mysqli_fetch_row($result))
-    {
-    echo '
+    if ($result = mysqli_query($con, $sql)) {
+        // Fetch one and one row
+  while ($row = mysqli_fetch_row($result)) {
+      echo '
           <tr>
-             <td><a href="delpro.php?item=' . urlencode($row[0]) . '">Delete</a></td>
-        <td>' .$row[1] . '</td>
-        <td>' . $row[2] . '</td>
+             <td><a href="delpro.php?item='.urlencode($row[0]).'">Delete</a></td>
+        <td>'.$row[1].'</td>
+        <td>'.$row[2].'</td>
       </tr>
     ';
-    }
+  }
   // Free result set
   mysqli_free_result($result);
-}
+    }
 
-mysqli_close($con);
-?>
+    mysqli_close($con);
+    ?>
     </tbody>
   </table
    <div class="table-responsive">          
@@ -57,32 +54,31 @@ mysqli_close($con);
     </thead>
     <tbody>
       <?php
-$con=mysqli_connect($hostname,$usename,$password,$database);
-$sql="SELECT * FROM Orders";
+$con = mysqli_connect($hostname, $usename, $password, $database);
+    $sql = 'SELECT * FROM Orders';
 
-if ($result=mysqli_query($con,$sql))
-  {
-  // Fetch one and one row
-  while ($row=mysqli_fetch_row($result))
-    {
-    echo '
+    if ($result = mysqli_query($con, $sql)) {
+        // Fetch one and one row
+  while ($row = mysqli_fetch_row($result)) {
+      echo '
           <tr>
        
-        <td>' .$row[0] . '</td>
-        <td>' . $row[1] . '</td>
-        <td>' . $row[2] . '</td>
+        <td>'.$row[0].'</td>
+        <td>'.$row[1].'</td>
+        <td>'.$row[2].'</td>
       </tr>
     ';
-    }
+  }
   // Free result set
   mysqli_free_result($result);
-}
+    }
 
-mysqli_close($con);
-?>
+    mysqli_close($con);
+    ?>
     </tbody>
   </table>
 <?php
+
 } else {
     ?>
     <div class="page-header">
@@ -101,6 +97,7 @@ mysqli_close($con);
 <input type="submit" class="btn btn-info" value="Create" role="button">
 </form>
     <?php
+
 }
-include("functions/footer.php");
+include 'functions/footer.php';
 ?>

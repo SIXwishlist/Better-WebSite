@@ -7,13 +7,13 @@ class PlanTest extends TestCase
     public function testDeletion()
     {
         self::authorizeFromEnv();
-        $p = Plan::create(array(
-            'amount' => 2000,
+        $p = Plan::create([
+            'amount'   => 2000,
             'interval' => 'month',
             'currency' => 'usd',
-            'name' => 'Plan',
-            'id' => 'gold-' . self::generateRandomString(20)
-        ));
+            'name'     => 'Plan',
+            'id'       => 'gold-'.self::generateRandomString(20),
+        ]);
         $p->delete();
         $this->assertTrue($p->deleted);
     }
@@ -33,14 +33,14 @@ class PlanTest extends TestCase
     public function testSave()
     {
         self::authorizeFromEnv();
-        $planID = 'gold-' . self::generateRandomString(20);
-        $p = Plan::create(array(
+        $planID = 'gold-'.self::generateRandomString(20);
+        $p = Plan::create([
             'amount'   => 2000,
             'interval' => 'month',
             'currency' => 'usd',
             'name'     => 'Plan',
-            'id'       => $planID
-        ));
+            'id'       => $planID,
+        ]);
         $p->name = 'A new plan name';
         $p->save();
         $this->assertSame($p->name, 'A new plan name');

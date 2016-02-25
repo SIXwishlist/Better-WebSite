@@ -7,8 +7,8 @@ Version: 1
 Author: Thomas Wilbur
 Author URI: http://www.example.com
 */
-echo register_menu("Cool");
-function Cool() {
-    echo "This is the page";
+echo register_menu('Cool');
+function Cool()
+{
+    echo 'This is the page';
 }
-?>
