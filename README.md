@@ -1,6 +1,6 @@
-# Tecflare Multisite
+# Tecflare Poke
 
-**Script Not Maintained Anymore We are moving to poKe**
+[![StyleCI](https://styleci.io/repos/52529036/shield)](https://styleci.io/repos/52529036)
 
 [![Build Status](http://tecflare.com:10000/job/multiSite-dev-project/2/badge/icon)](http://tecflare.com:10000/job/multiSite-dev-project/2/)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Tecflare-Corporation/mSite?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -8,7 +8,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/80d424e7f98749549cc314b4fc827abd)](https://www.codacy.com/app/dodiaraculus/mSite)
 
 
-Tecflare Multisite is a professional webpage system like wordpress.
+Tecflare Poke is a professional webpage system like wordpress.
 
 Website:http://tecflare-corporation.github.io/mSite
 
