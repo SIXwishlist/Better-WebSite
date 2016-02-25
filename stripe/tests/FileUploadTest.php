@@ -9,10 +9,10 @@ class FileUploadTest extends TestCase
         $fp = fopen(dirname(__FILE__).'/../data/test.png', 'r');
         self::authorizeFromEnv();
         $file = FileUpload::create(
-            array(
+            [
                 'purpose' => 'dispute_evidence',
-                'file' => $fp,
-            )
+                'file'    => $fp,
+            ]
         );
         fclose($fp);
         $this->assertSame(95, $file->size);
@@ -29,10 +29,10 @@ class FileUploadTest extends TestCase
         $curlFile = new \CurlFile(dirname(__FILE__).'/../data/test.png');
         self::authorizeFromEnv();
         $file = FileUpload::create(
-            array(
+            [
                 'purpose' => 'dispute_evidence',
-                'file' => $curlFile,
-            )
+                'file'    => $curlFile,
+            ]
         );
         $this->assertSame(95, $file->size);
         $this->assertSame('png', $file->type);

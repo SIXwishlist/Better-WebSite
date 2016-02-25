@@ -1,3 +1,4 @@
 <?php
-include("functions/checkLogin.php");
-include("functions/upload.php");?>
+
+include 'functions/checkLogin.php';
+include 'functions/upload.php';

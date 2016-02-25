@@ -5,7 +5,7 @@ namespace Stripe;
 class Recipient extends ApiResource
 {
     /**
-     * @param string $id The ID of the recipient to retrieve.
+     * @param string            $id   The ID of the recipient to retrieve.
      * @param array|string|null $opts
      *
      * @return Recipient
@@ -16,7 +16,7 @@ class Recipient extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $opts
      *
      * @return Collection of Recipients
@@ -27,7 +27,7 @@ class Recipient extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $opts
      *
      * @return Recipient The created recipient.
@@ -57,7 +57,6 @@ class Recipient extends ApiResource
         return $this->_delete($params, $opts);
     }
 
-
     /**
      * @param array|null $params
      *
@@ -66,10 +65,11 @@ class Recipient extends ApiResource
     public function transfers($params = null)
     {
         if ($params === null) {
-            $params = array();
+            $params = [];
         }
         $params['recipient'] = $this->id;
         $transfers = Transfer::all($params, $this->_opts);
+
         return $transfers;
     }
 }

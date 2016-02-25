@@ -1,28 +1,35 @@
 <?php
+
 error_reporting(E_ALL);
-class menu {
-    private $mymenu = Array();
- public function registermenu($opt) {
-     $this->mymenu[] = $opt;
- } 
- public function getmenu() {
-     return $this->mymenu;
- }
+class menu
+{
+    private $mymenu = [];
+
+    public function registermenu($opt)
+    {
+        $this->mymenu[] = $opt;
+    }
+
+    public function getmenu()
+    {
+        return $this->mymenu;
+    }
 }
-$menu = new menu;
-include "../config.php";
+$menu = new menu();
+include '../config.php';
 //include PHP HOOKS Class
-include_once "engine/phphooks.class.php";
+include_once 'engine/phphooks.class.php';
 //create instance of class
 $hook = new Phphooks();
-//fetch the active plugins name form db. store in array $plugins. 
+//fetch the active plugins name form db. store in array $plugins.
 include_once 'engine/database.class.php';
 $db = new Database($hostname, $usename, $password, $database, '');
 $db->connect();
-$sql = "SELECT filename FROM Plugins WHERE action = '" . $db->escape(1) . "'";
+$sql = "SELECT filename FROM Plugins WHERE action = '".$db->escape(1)."'";
 $result_rows = $db->fetch_all_array($sql);
-foreach ($result_rows as $result_rows)
+foreach ($result_rows as $result_rows) {
     $plugins[] = $result_rows['filename'];
+}
     //unset means load all plugins in the plugin fold. set it, just load the plugins in this array.
 $hook->active_plugins = $plugins;
 //set hook to which plugin developers can assign functions
@@ -33,24 +40,25 @@ $hook->set_hook('test');
 $hook->load_plugins();
 //now, this is a workaround because plugins, when included, can't access $hook variable, so we
 //as developers have to basically redefine functions which can be called from plugin files
-function add_hook ($tag, $function, $priority = 10)
+function add_hook($tag, $function, $priority = 10)
 {
     global $hook;
     $hook->add_hook($tag, $function, $priority);
 }
 //same as above
-function register_plugin ($plugin_id, $data)
+function register_plugin($plugin_id, $data)
 {
     global $hook;
     $hook->register_plugin($plugin_id, $data);
 }
-function register_menu ($opt) {
+function register_menu($opt)
+{
     global $menu;
     $menu->registermenu($opt);
 }
-function return_menu () {
+function return_menu()
+{
     global $menu;
+
     return $menu->getmenu();
 }
-
-?>

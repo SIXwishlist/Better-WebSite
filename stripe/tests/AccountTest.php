@@ -6,76 +6,76 @@ class AccountTest extends TestCase
 {
     private function managedAccountResponse($id)
     {
-        return array(
-            'id' => $id,
-            'currencies_supported' => array('usd', 'aed', 'afn', '...'),
-            'object' => 'account',
-            'business_name' => 'Stripe.com',
-            'bank_accounts' => array(
-                'object' => 'list',
+        return [
+            'id'                   => $id,
+            'currencies_supported' => ['usd', 'aed', 'afn', '...'],
+            'object'               => 'account',
+            'business_name'        => 'Stripe.com',
+            'bank_accounts'        => [
+                'object'      => 'list',
                 'total_count' => 0,
-                'has_more' => false,
-                'url' => '/v1/accounts/' . $id . '/bank_accounts',
-                'data' => array()
-            ),
-            'verification' => array(
-                'fields_needed' => array(
+                'has_more'    => false,
+                'url'         => '/v1/accounts/'.$id.'/bank_accounts',
+                'data'        => [],
+            ],
+            'verification' => [
+                'fields_needed' => [
                     'product_description',
                     'business_url',
                     'support_phone',
                     'bank_account',
                     'tos_acceptance.ip',
-                    'tos_acceptance.date'
-                ),
-                'due_by' => null,
-                'contacted' => false
-            ),
-            'tos_acceptance' => array(
-                'ip' => null,
-                'date' => null,
-                'user_agent' => null
-            ),
-            'legal_entity' => array(
-                'type' => null,
+                    'tos_acceptance.date',
+                ],
+                'due_by'    => null,
+                'contacted' => false,
+            ],
+            'tos_acceptance' => [
+                'ip'         => null,
+                'date'       => null,
+                'user_agent' => null,
+            ],
+            'legal_entity' => [
+                'type'          => null,
                 'business_name' => null,
-                'address' => array(
-                    'line1' => null,
-                    'line2' => null,
-                    'city' => null,
-                    'state' => null,
+                'address'       => [
+                    'line1'       => null,
+                    'line2'       => null,
+                    'city'        => null,
+                    'state'       => null,
                     'postal_code' => null,
-                    'country' => 'US'
-                ),
-                'first_name' => null,
-                'last_name' => null,
+                    'country'     => 'US',
+                ],
+                'first_name'        => null,
+                'last_name'         => null,
                 'additional_owners' => null,
-                'verification' => array(
-                    'status' => 'unverified',
+                'verification'      => [
+                    'status'   => 'unverified',
                     'document' => null,
-                    'details' => null
-                )
-            )
-        );
+                    'details'  => null,
+                ],
+            ],
+        ];
     }
 
     private function deletedAccountResponse($id)
     {
-        return array(
-            'id' => $id,
-            'deleted' => true
-        );
+        return [
+            'id'      => $id,
+            'deleted' => true,
+        ];
     }
 
     public function testBasicRetrieve()
     {
-        $this->mockRequest('GET', '/v1/account', array(), $this->managedAccountResponse('acct_ABC'));
+        $this->mockRequest('GET', '/v1/account', [], $this->managedAccountResponse('acct_ABC'));
         $account = Account::retrieve();
         $this->assertSame($account->id, 'acct_ABC');
     }
 
     public function testIDRetrieve()
     {
-        $this->mockRequest('GET', '/v1/accounts/acct_DEF', array(), $this->managedAccountResponse('acct_DEF'));
+        $this->mockRequest('GET', '/v1/accounts/acct_DEF', [], $this->managedAccountResponse('acct_DEF'));
         $account = Account::retrieve('acct_DEF');
         $this->assertSame($account->id, 'acct_DEF');
     }
@@ -85,12 +85,12 @@ class AccountTest extends TestCase
         $this->mockRequest(
             'POST',
             '/v1/accounts',
-            array('managed' => 'true'),
+            ['managed' => 'true'],
             $this->managedAccountResponse('acct_ABC')
         );
-        $account = Account::create(array(
-            'managed' => true
-        ));
+        $account = Account::create([
+            'managed' => true,
+        ]);
         $this->assertSame($account->id, 'acct_ABC');
     }
 
@@ -100,8 +100,8 @@ class AccountTest extends TestCase
 
         $this->mockRequest(
             'DELETE',
-            '/v1/accounts/' . $account->id,
-            array(),
+            '/v1/accounts/'.$account->id,
+            [],
             $this->deletedAccountResponse('acct_ABC')
         );
         $deleted = $account->delete();
@@ -112,17 +112,17 @@ class AccountTest extends TestCase
     public function testUpdateLegalEntity()
     {
         $response = $this->managedAccountResponse('acct_ABC');
-        $this->mockRequest('POST', '/v1/accounts', array('managed' => 'true'), $response);
+        $this->mockRequest('POST', '/v1/accounts', ['managed' => 'true'], $response);
 
         $response['legal_entity']['first_name'] = 'Bob';
         $this->mockRequest(
             'POST',
             '/v1/accounts/acct_ABC',
-            array('legal_entity' => array('first_name' => 'Bob')),
+            ['legal_entity' => ['first_name' => 'Bob']],
             $response
         );
 
-        $account = Account::create(array('managed' => true));
+        $account = Account::create(['managed' => true]);
         $account->legal_entity->first_name = 'Bob';
         $account->save();
 
@@ -132,30 +132,30 @@ class AccountTest extends TestCase
     public function testUpdateAdditionalOwners()
     {
         $response = $this->managedAccountResponse('acct_ABC');
-        $this->mockRequest('POST', '/v1/accounts', array('managed' => 'true'), $response);
+        $this->mockRequest('POST', '/v1/accounts', ['managed' => 'true'], $response);
 
-        $response['legal_entity']['additional_owners'] = array(array(
+        $response['legal_entity']['additional_owners'] = [[
             'first_name' => 'Bob',
-            'last_name' => null,
-            'address' => array(
-                'line1' => null,
-                'line2' => null,
-                'city' => null,
-                'state' => null,
+            'last_name'  => null,
+            'address'    => [
+                'line1'       => null,
+                'line2'       => null,
+                'city'        => null,
+                'state'       => null,
                 'postal_code' => null,
-                'country' => null
-            ),
-            'verification' => array(
-                'status' => 'unverified',
+                'country'     => null,
+            ],
+            'verification' => [
+                'status'   => 'unverified',
                 'document' => null,
-                'details' => null
-            )
-        ));
+                'details'  => null,
+            ],
+        ]];
 
         $this->mockRequest(
             'POST',
             '/v1/accounts/acct_ABC',
-            array('legal_entity' => array('additional_owners' => array(array('first_name' => 'Bob')))),
+            ['legal_entity' => ['additional_owners' => [['first_name' => 'Bob']]]],
             $response
         );
 
@@ -163,7 +163,7 @@ class AccountTest extends TestCase
         $this->mockRequest(
             'POST',
             '/v1/accounts/acct_ABC',
-            array('legal_entity' => array('additional_owners' => array(array('last_name' => 'Smith')))),
+            ['legal_entity' => ['additional_owners' => [['last_name' => 'Smith']]]],
             $response
         );
 
@@ -171,7 +171,7 @@ class AccountTest extends TestCase
         $this->mockRequest(
             'POST',
             '/v1/accounts/acct_ABC',
-            array('legal_entity' => array('additional_owners' => array(array('last_name' => 'Johnson')))),
+            ['legal_entity' => ['additional_owners' => [['last_name' => 'Johnson']]]],
             $response
         );
 
@@ -179,23 +179,23 @@ class AccountTest extends TestCase
         $this->mockRequest(
             'POST',
             '/v1/accounts/acct_ABC',
-            array('legal_entity' => array('additional_owners' => array(array('verification' => array('document' => 'file_123'))))),
+            ['legal_entity' => ['additional_owners' => [['verification' => ['document' => 'file_123']]]]],
             $response
         );
 
-        $response['legal_entity']['additional_owners'][1] = array(
+        $response['legal_entity']['additional_owners'][1] = [
             'first_name' => 'Jane',
-            'last_name' => 'Doe'
-        );
+            'last_name'  => 'Doe',
+        ];
         $this->mockRequest(
             'POST',
             '/v1/accounts/acct_ABC',
-            array('legal_entity' => array('additional_owners' => array(1 => array('first_name' => 'Jane')))),
+            ['legal_entity' => ['additional_owners' => [1 => ['first_name' => 'Jane']]]],
             $response
         );
 
-        $account = Account::create(array('managed' => true));
-        $account->legal_entity->additional_owners = array(array('first_name' => 'Bob'));
+        $account = Account::create(['managed' => true]);
+        $account->legal_entity->additional_owners = [['first_name' => 'Bob']];
         $account->save();
         $this->assertSame(1, count($account->legal_entity->additional_owners));
         $this->assertSame('Bob', $account->legal_entity->additional_owners[0]->first_name);
@@ -214,7 +214,7 @@ class AccountTest extends TestCase
         $account->save();
         $this->assertSame('file_123', $account->legal_entity->additional_owners[0]->verification->document);
 
-        $account->legal_entity->additional_owners[1] = array('first_name' => 'Jane');
+        $account->legal_entity->additional_owners[1] = ['first_name' => 'Jane'];
         $account->save();
         $this->assertSame('Jane', $account->legal_entity->additional_owners[1]->first_name);
     }

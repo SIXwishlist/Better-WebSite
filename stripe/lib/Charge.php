@@ -5,7 +5,7 @@ namespace Stripe;
 class Charge extends ApiResource
 {
     /**
-     * @param string $id The ID of the charge to retrieve.
+     * @param string            $id      The ID of the charge to retrieve.
      * @param array|string|null $options
      *
      * @return Charge
@@ -16,7 +16,7 @@ class Charge extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $options
      *
      * @return Collection of Charges
@@ -27,7 +27,7 @@ class Charge extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $options
      *
      * @return Charge The created charge.
@@ -48,35 +48,37 @@ class Charge extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $options
      *
      * @return Charge The refunded charge.
      */
     public function refund($params = null, $options = null)
     {
-        $url = $this->instanceUrl() . '/refund';
+        $url = $this->instanceUrl().'/refund';
         list($response, $opts) = $this->_request('post', $url, $params, $options);
         $this->refreshFrom($response, $opts);
+
         return $this;
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $options
      *
      * @return Charge The captured charge.
      */
     public function capture($params = null, $options = null)
     {
-        $url = $this->instanceUrl() . '/capture';
+        $url = $this->instanceUrl().'/capture';
         list($response, $opts) = $this->_request('post', $url, $params, $options);
         $this->refreshFrom($response, $opts);
+
         return $this;
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $options
      *
      * @deprecated Use the `save` method on the Dispute object
@@ -85,9 +87,10 @@ class Charge extends ApiResource
      */
     public function updateDispute($params = null, $options = null)
     {
-        $url = $this->instanceUrl() . '/dispute';
+        $url = $this->instanceUrl().'/dispute';
         list($response, $opts) = $this->_request('post', $url, $params, $options);
-        $this->refreshFrom(array('dispute' => $response), $opts, true);
+        $this->refreshFrom(['dispute' => $response], $opts, true);
+
         return $this->dispute;
     }
 
@@ -100,9 +103,10 @@ class Charge extends ApiResource
      */
     public function closeDispute($options = null)
     {
-        $url = $this->instanceUrl() . '/dispute/close';
+        $url = $this->instanceUrl().'/dispute/close';
         list($response, $opts) = $this->_request('post', $url, null, $options);
         $this->refreshFrom($response, $opts);
+
         return $this;
     }
 
@@ -113,10 +117,11 @@ class Charge extends ApiResource
      */
     public function markAsFraudulent($opts = null)
     {
-        $params = array('fraud_details' => array('user_report' => 'fraudulent'));
+        $params = ['fraud_details' => ['user_report' => 'fraudulent']];
         $url = $this->instanceUrl();
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
+
         return $this;
     }
 
@@ -127,10 +132,11 @@ class Charge extends ApiResource
      */
     public function markAsSafe($opts = null)
     {
-        $params = array('fraud_details' => array('user_report' => 'safe'));
+        $params = ['fraud_details' => ['user_report' => 'safe']];
         $url = $this->instanceUrl();
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
+
         return $this;
     }
 }

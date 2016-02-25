@@ -13,18 +13,18 @@ class DisputeTest extends TestCase
 
     private function createDisputedCharge()
     {
-        $card = array(
-            'number' => '4000000000000259',
+        $card = [
+            'number'    => '4000000000000259',
             'exp_month' => 5,
-            'exp_year' => date('Y') + 1
-        );
+            'exp_year'  => date('Y') + 1,
+        ];
 
         $c = Charge::create(
-            array(
-                'amount' => 100,
+            [
+                'amount'   => 100,
                 'currency' => 'usd',
-                'card' => $card
-            )
+                'card'     => $card,
+            ]
         );
         $c = Charge::retrieve($c->id);
 
@@ -32,7 +32,7 @@ class DisputeTest extends TestCase
 
         while ($c->dispute === null) {
             if ($attempts > 5) {
-                throw "Charge is taking too long to be disputed";
+                throw 'Charge is taking too long to be disputed';
             }
             sleep(1);
             $c = Charge::retrieve($c->id);
@@ -47,13 +47,12 @@ class DisputeTest extends TestCase
         self::authorizeFromEnv();
 
         $sublist = Dispute::all(
-            array(
+            [
                 'limit' => 3,
-            )
+            ]
         );
         $this->assertSame(3, count($sublist->data));
     }
-
 
     public function testUpdate()
     {
@@ -62,11 +61,11 @@ class DisputeTest extends TestCase
         $c = $this->createDisputedCharge();
 
         $d = $c->dispute;
-        $d->evidence["customer_name"] = "Bob";
+        $d->evidence['customer_name'] = 'Bob';
         $s = $d->save();
 
         $this->assertSame($d->id, $s->id);
-        $this->assertSame("Bob", $s->evidence["customer_name"]);
+        $this->assertSame('Bob', $s->evidence['customer_name']);
     }
 
     public function testClose()
@@ -76,7 +75,7 @@ class DisputeTest extends TestCase
         $c = $this->createDisputedCharge();
 
         $d = $c->dispute->close();
-        $this->assertSame("lost", $d->status);
+        $this->assertSame('lost', $d->status);
     }
 
     public function testRetrieve()

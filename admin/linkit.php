@@ -1,13 +1,13 @@
 <?php
-include("functions/checkLogin.php");
-$partnerid = $_POST["partner"];
-$pp = file_get_contents("http://partners.tecflare.com/api/index.php?appid=" . $partnerid . "&command=genvkey&value=testaccount");
-if ($pp == '"testaccount[vkey-:5ebbe:-vkey]"')
-{
+
+include 'functions/checkLogin.php';
+$partnerid = $_POST['partner'];
+$pp = file_get_contents('http://partners.tecflare.com/api/index.php?appid='.$partnerid.'&command=genvkey&value=testaccount');
+if ($pp == '"testaccount[vkey-:5ebbe:-vkey]"') {
     //Account is real
     $content = '
         </div>
-<a href="http://partners.tecflare.com/valid.flare?site=' . $partnerid . '">
+<a href="http://partners.tecflare.com/valid.flare?site='.$partnerid.'">
 <img src="http://partners.tecflare.com/images/badge.png">
 </a>
     <script src="javascript/bootstrap.min.js"></script>
@@ -31,11 +31,9 @@ if ($pp == '"testaccount[vkey-:5ebbe:-vkey]"')
 </html> 
 
     ';
-    file_put_contents("../theme/footer.php",$content);
-     header("Location: link.php?error=no");
-}
-else {
+    file_put_contents('../theme/footer.php', $content);
+    header('Location: link.php?error=no');
+} else {
     //Account does not exist
-    header("Location: link.php?error=yes");
+    header('Location: link.php?error=yes');
 }
-?>

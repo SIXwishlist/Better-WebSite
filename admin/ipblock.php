@@ -1,17 +1,17 @@
 <?php
-include("functions/checkLogin.php");
-include("../config.php");
-include("functions/head.php");
+include 'functions/checkLogin.php';
+include '../config.php';
+include 'functions/head.php';
 ?>
 <div class="page-header">
 <h1>Application Ip Block</h1>
 </div>
 <?php
-if (isset($_GET["error"]))
-{
+if (isset($_GET['error'])) {
     ?>
     IP Blocked!
     <?php
+
 }
 ?>
 <form method="post" action = "blk.php">
@@ -35,26 +35,24 @@ if (isset($_GET["error"]))
     </thead>
     <tbody>
          <?php
-$con=mysqli_connect($hostname,$usename,$password,$database);
-$sql="SELECT * FROM Blockedips";
+$con = mysqli_connect($hostname, $usename, $password, $database);
+$sql = 'SELECT * FROM Blockedips';
 
-if ($result=mysqli_query($con,$sql))
-  {
-  // Fetch one and one row
-  while ($row=mysqli_fetch_row($result))
-  {
-    echo '
+if ($result = mysqli_query($con, $sql)) {
+    // Fetch one and one row
+  while ($row = mysqli_fetch_row($result)) {
+      echo '
     <tr>
     <td>
-    ' . $row[1] . '
+    '.$row[1].'
     </td>
     <td>
-    ' . $row[2] . '
+    '.$row[2].'
     </td>
     </tr>
     ';
   }
-  }
+}
 mysqli_free_result($result);
 mysqli_close($con);
 ?>
@@ -63,5 +61,5 @@ mysqli_close($con);
   </div>
 </div>
 <?php
-include("functions/footer.php");
+include 'functions/footer.php';
 ?>

@@ -1,21 +1,25 @@
 <?php
-if (!isset($testmode))
-{
-include("theme/head.php");
-if (isset($_SESSION["usename"])) include("theme/admin.php");
-?>
+if (!isset($testmode)) {
+    include 'theme/head.php';
+    if (isset($_SESSION['usename'])) {
+        include 'theme/admin.php';
+    }
+    ?>
 <center>
 <div class="page-header">
   <h1>Welcome to <?php
-$con=mysqli_connect($hostname,$usename, $password, $database);
-$sql="SELECT id,code,value FROM Settings";
-$result=mysqli_query($con,$sql);
- while ($row=mysqli_fetch_row($result))
-    {
-     if ($row[0] == 1) echo $row[2];
-     if ($row[0] == 2 && $row[2] == "on") $err = "yes";
+$con = mysqli_connect($hostname, $usename, $password, $database);
+    $sql = 'SELECT id,code,value FROM Settings';
+    $result = mysqli_query($con, $sql);
+    while ($row = mysqli_fetch_row($result)) {
+        if ($row[0] == 1) {
+            echo $row[2];
+        }
+        if ($row[0] == 2 && $row[2] == 'on') {
+            $err = 'yes';
+        }
     }
-   mysqli_free_result($result);
+    mysqli_free_result($result);
     mysqli_close($con);
     ?><small></small></h1>
 </div>
@@ -25,14 +29,15 @@ $result=mysqli_query($con,$sql);
 <div class="panel panel-default container">
   <div class="panel-body">
    <?php
-$con=mysqli_connect($hostname,$usename, $password, $database);
-$sql="SELECT id,code,value FROM Settings";
-$result=mysqli_query($con,$sql);
- while ($row=mysqli_fetch_row($result))
-    {
-      if ($row[0] == 3) echo $row[2];
+$con = mysqli_connect($hostname, $usename, $password, $database);
+    $sql = 'SELECT id,code,value FROM Settings';
+    $result = mysqli_query($con, $sql);
+    while ($row = mysqli_fetch_row($result)) {
+        if ($row[0] == 3) {
+            echo $row[2];
+        }
     }
-   mysqli_free_result($result);
+    mysqli_free_result($result);
     mysqli_close($con);
     ?>
     </div>
@@ -41,6 +46,6 @@ $result=mysqli_query($con,$sql);
 </div>
 </center>
 <?php
-include("theme/footer.php");
+include 'theme/footer.php';
 }
 ?>

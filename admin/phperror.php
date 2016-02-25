@@ -43,7 +43,7 @@
 <body>
 <div>
     <h2>Multisite Crashed due to a parameter error!</h2>
-    <p>Parameter <?php echo $_GET["l"]; ?>x<?php echo $_GET["n"]; ?> encountered an error. The error message was:<br> <?php echo $_GET["m"]; ?> </p>
+    <p>Parameter <?php echo $_GET['l']; ?>x<?php echo $_GET['n']; ?> encountered an error. The error message was:<br> <?php echo $_GET['m']; ?> </p>
  
 </div>
 </body>

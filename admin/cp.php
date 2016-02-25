@@ -1,7 +1,7 @@
 <?php
-include("functions/checkLogin.php");
-include("../config.php");
-include("functions/head.php");
+include 'functions/checkLogin.php';
+include '../config.php';
+include 'functions/head.php';
 error_reporting(0);
 ?>
 <div class="page-header">
@@ -10,13 +10,14 @@ error_reporting(0);
 <div class="alert alert-waning" role="alert">Waning! This script will not have updates. We are moving to poKe. We are sorry for this inconvinence but we are moving.</div>
 <div class="row">
 <?php
-$con=mysqli_connect($hostname,$usename, $password, $database);
-$sql="SELECT id,code,value FROM Settings";
-$result=mysqli_query($con,$sql);
- while ($row=mysqli_fetch_row($result))
-    {
-     if ($row[2] == "on") echo '<div class="alert alert-waning" role="alert">Waning! Maintanance Mode is active.</div>';
-    }
+$con = mysqli_connect($hostname, $usename, $password, $database);
+$sql = 'SELECT id,code,value FROM Settings';
+$result = mysqli_query($con, $sql);
+ while ($row = mysqli_fetch_row($result)) {
+     if ($row[2] == 'on') {
+         echo '<div class="alert alert-waning" role="alert">Waning! Maintanance Mode is active.</div>';
+     }
+ }
    mysqli_free_result($result);
     mysqli_close($con);
     ?>
@@ -24,13 +25,12 @@ $result=mysqli_query($con,$sql);
       <div class="tile red">
         <h4 class="title"> <?php
     $count = 0;
-$con=mysqli_connect($hostname,$usename, $password, $database);
-$sql="SELECT * FROM Items";
-$result=mysqli_query($con,$sql);
- while ($row=mysqli_fetch_row($result))
-    {
+$con = mysqli_connect($hostname, $usename, $password, $database);
+$sql = 'SELECT * FROM Items';
+$result = mysqli_query($con, $sql);
+ while ($row = mysqli_fetch_row($result)) {
      $count = $count + 1;
-    }
+ }
    mysqli_free_result($result);
     mysqli_close($con);
     echo $count;
@@ -42,13 +42,12 @@ $result=mysqli_query($con,$sql);
       <div class="tile orange">
         <h4 class="title"><?php
     $count = 0;
-$con=mysqli_connect($hostname,$usename, $password, $database);
-$sql="SELECT id,usename,password FROM Administrators";
-$result=mysqli_query($con,$sql);
- while ($row=mysqli_fetch_row($result))
-    {
+$con = mysqli_connect($hostname, $usename, $password, $database);
+$sql = 'SELECT id,usename,password FROM Administrators';
+$result = mysqli_query($con, $sql);
+ while ($row = mysqli_fetch_row($result)) {
      $count = $count + 1;
-    }
+ }
    mysqli_free_result($result);
     mysqli_close($con);
     echo $count;
@@ -60,13 +59,12 @@ $result=mysqli_query($con,$sql);
       <div class="tile red">
         <h4 class="title"><?php
     $count = 0;
-$con=mysqli_connect($hostname,$usename, $password, $database);
-$sql="SELECT * FROM Posts";
-$result=mysqli_query($con,$sql);
- while ($row=mysqli_fetch_row($result))
-    {
+$con = mysqli_connect($hostname, $usename, $password, $database);
+$sql = 'SELECT * FROM Posts';
+$result = mysqli_query($con, $sql);
+ while ($row = mysqli_fetch_row($result)) {
      $count = $count + 1;
-    }
+ }
    mysqli_free_result($result);
     mysqli_close($con);
     echo $count;
@@ -84,13 +82,12 @@ $result=mysqli_query($con,$sql);
       <div class="tile purple">
         <h4 class="title"><?php
     $count = 0;
-$con=mysqli_connect($hostname,$usename, $password, $database);
-$sql="SELECT * FROM Orders";
-$result=mysqli_query($con,$sql);
- while ($row=mysqli_fetch_row($result))
-    {
+$con = mysqli_connect($hostname, $usename, $password, $database);
+$sql = 'SELECT * FROM Orders';
+$result = mysqli_query($con, $sql);
+ while ($row = mysqli_fetch_row($result)) {
      $count = $count + 1;
-    }
+ }
    mysqli_free_result($result);
     mysqli_close($con);
     echo $count;
@@ -100,6 +97,6 @@ $result=mysqli_query($con,$sql);
 </div>
 </div>
 <?php
-include("functions/footer.php");
+include 'functions/footer.php';
 ?>
 

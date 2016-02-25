@@ -1,14 +1,14 @@
 <?php
 error_reporting(0);
-include("functions/checkLogin.php");
-include("../config.php");
-include("functions/head.php");
+include 'functions/checkLogin.php';
+include '../config.php';
+include 'functions/head.php';
 ?>
 <div class="page-header">
 <h1>Upgrade to Pro</h1>
 </div>
 <?php
-if (isset($_GET["err"])) {
+if (isset($_GET['err'])) {
     echo "<div class='alert alert-danger'>The licence key is invalid.</div>";
 }
 ?>
@@ -19,5 +19,5 @@ if (isset($_GET["err"])) {
 </form>
 <img src="style/codecanyon-dark-background.png">
 <?php
-include("functions/footer.php");
+include 'functions/footer.php';
 ?>

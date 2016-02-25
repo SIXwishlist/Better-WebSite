@@ -1,24 +1,24 @@
 <?php
 error_reporting(0);
-include("functions/checkLogin.php");
-include("../config.php");
-include("functions/head.php");
+include 'functions/checkLogin.php';
+include '../config.php';
+include 'functions/head.php';
 ?>
 <div class="page-header">
 <h1>Link Tecflare Partner Account</h1>
 </div>
 <?php
-if (isset($_GET["error"]) && $_GET["error"] == "yes")
-{
+if (isset($_GET['error']) && $_GET['error'] == 'yes') {
     ?>
     <div class="alert alert-danger">Partner does not exist.</div>
     <?php
+
 }
-if (isset($_GET["error"]) && $_GET["error"] == "no")
-{
+if (isset($_GET['error']) && $_GET['error'] == 'no') {
     ?>
    <div class="alert alert-success">Partner linked successfully.</div> 
 <?php
+
 }
 ?>
 <form method="POST" action="linkit.php">
@@ -29,5 +29,5 @@ if (isset($_GET["error"]) && $_GET["error"] == "no")
 <input type="submit" class="btn btn-info" value="Link" role="button">
 </form>
 <?php
-include("functions/footer.php");
+include 'functions/footer.php';
 ?>

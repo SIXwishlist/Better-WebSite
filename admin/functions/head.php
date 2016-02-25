@@ -1,23 +1,23 @@
 <?php error_reporting(0);
-function errorHandler($n, $m, $f, $l) {
-  require_once 'errorsend.php';
+function errorHandler($n, $m, $f, $l)
+{
+    require_once 'errorsend.php';
 
-$config = array(
+    $config = [
     // required
     'access_token' => 'a4073d551fb44087b5ebeea61588bbc4',
     // optional - environment name. any string will do.
     'environment' => 'production',
     // optional - path to directory your code is in. used for linking stack traces.
-    'root' => $_SERVER['DOCUMENT_ROOT']
-);
-Rollbar::init($config);
-Rollbar::report_message($m, 'error');
-  $str = 'phperror.php?n=' . urlencode($n) . '&m=' . urlencode($m) . '&f=' . urlencode($f) . '&l=' . urlencode($l);
-    header('Location: ' . $str);
+    'root' => $_SERVER['DOCUMENT_ROOT'],
+];
+    Rollbar::init($config);
+    Rollbar::report_message($m, 'error');
+    $str = 'phperror.php?n='.urlencode($n).'&m='.urlencode($m).'&f='.urlencode($f).'&l='.urlencode($l);
+    header('Location: '.$str);
 }
 
 set_error_handler('errorHandler');
-
 
 ?>
 <!DOCTYPE html>
@@ -45,13 +45,13 @@ set_error_handler('errorHandler');
   <script src="syn/mode/xml/xml.js"></script>
   
   <?php 
-  if (!isset($nowdisable))
-  {
-    ?>
+  if (!isset($nowdisable)) {
+      ?>
   <script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
 <script>tinymce.init({selector:'textarea'});</script>
 <?php
-}
+
+  }
 ?>
   <script src="syn/mode/markdown/markdown.js"></script>
   <style type="text/css">
@@ -114,7 +114,7 @@ set_error_handler('errorHandler');
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav pull-right">
-      <li><a href="account.php"><?php echo $_SESSION["usename"]; ?></a></li>
+      <li><a href="account.php"><?php echo $_SESSION['usename']; ?></a></li>
       <li><a href="do.php?value=exit">Exit</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -125,44 +125,42 @@ set_error_handler('errorHandler');
               <li class="active"><a href="cp.php">Dashboard</a></li>
               <li><a href="settings.php">System Settings</a></li>
               <?php
-            function checkpro() {
-              if (file_exists("licence-details.php")) {
-              $envato_apikey = "ltmtnluhlj57v6x4amt19lkoiowjoq01";
-              include("licence-details.php");
-$envato_username = "dodiaraculus";
-$license_to_check = $licence_code;
-if(!empty($license_to_check) && !empty($envato_apikey) && !empty($envato_username) || $licence_code =="7294729347239"){
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'http://marketplace.envato.com/api/edge/'.$envato_username.'/'.$envato_apikey.'/verify-purchase:'.$license_to_check.'.json');
-curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$ch_data = curl_exec($ch);
-curl_close($ch);
-if(!empty($ch_data))
-{
-$json_data = json_decode($ch_data, true);
-if(isset($json_data["verify-purchase"]) && count($json_data["verify-purchase"])>0  || $licence_code =="7294729347239"){
-return true;
-} else {
-return false;
-}
-}
-else
-{
-return false;
-}
-} else { 
-return false;
-}
-} else {
-  return false;
-}
+            function checkpro()
+            {
+                if (file_exists('licence-details.php')) {
+                    $envato_apikey = 'ltmtnluhlj57v6x4amt19lkoiowjoq01';
+                    include 'licence-details.php';
+                    $envato_username = 'dodiaraculus';
+                    $license_to_check = $licence_code;
+                    if (!empty($license_to_check) && !empty($envato_apikey) && !empty($envato_username) || $licence_code == '7294729347239') {
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, 'http://marketplace.envato.com/api/edge/'.$envato_username.'/'.$envato_apikey.'/verify-purchase:'.$license_to_check.'.json');
+                        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        $ch_data = curl_exec($ch);
+                        curl_close($ch);
+                        if (!empty($ch_data)) {
+                            $json_data = json_decode($ch_data, true);
+                            if (isset($json_data['verify-purchase']) && count($json_data['verify-purchase']) > 0  || $licence_code == '7294729347239') {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
             }
-              if (checkpro() == true)
-              {
-              ?>
+              if (checkpro() == true) {
+                  ?>
               <li><a href="update.php">Update</a></li>
               <?php
+
               }
               ?>
               <li><a href="plugins.php">Plugins</a></li>
@@ -170,20 +168,20 @@ return false;
               <li><a href="store.php">Store</a></li>
               <li><a href="cloudfile.php">Storage</a></li>
               <?php
-              if (checkpro() == true)
-              {
-              ?>
+              if (checkpro() == true) {
+                  ?>
               <li><a href="ipblock.php">Firewall</a></li>
               <?php
+
               }
               ?>
                <?php
-                if (checkpro() == true)
-              {
-                ?>
+                if (checkpro() == true) {
+                    ?>
               <li><a href="bkup.php">Backup</a></li>
               <?php
-              }
+
+                }
               ?>
               <li><a href="link.php">Link Tecflare</a></li>
               <li><a href="post.php">Blog</a></li>
@@ -193,16 +191,16 @@ return false;
               <li><a href="account.php">My Account</a></li>
             
                <?php 
-              if (checkpro() == false)
-              {
-              ?>
+              if (checkpro() == false) {
+                  ?>
               <li><a href="upgrade.php"><B>Upgrade to Pro</B></a></li>
               <?php
+
               }
-              error_reporting(E_ALL); include "engine/init.php"; 
+              error_reporting(E_ALL); include 'engine/init.php';
               $menys = return_menu();
-foreach($menys as $option) {
-  echo '<li><a href="plugins.php?opt=' . $option . '">' . $option . '</a>';
+foreach ($menys as $option) {
+    echo '<li><a href="plugins.php?opt='.$option.'">'.$option.'</a>';
 }
               ?>
             
