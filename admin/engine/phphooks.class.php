@@ -32,7 +32,7 @@ class Phphooks
      * register hook name/tag, so plugin developers can attach functions to hooks.
      *
      * @since 1.0
-     * 
+     *
      * @param string $tag. The name of the hook.
      */
     public function set_hook($tag)
@@ -45,7 +45,7 @@ class Phphooks
      * register multiple hooks name/tag.
      *
      * @since 1.0
-     * 
+     *
      * @param array $tags. The name of the hooks.
      */
     public function set_hooks($tags)
@@ -59,7 +59,7 @@ class Phphooks
      * write hook off.
      *
      * @since 1.0
-     * 
+     *
      * @param string $tag. The name of the hook.
      */
     public function unset_hook($tag)
@@ -72,7 +72,7 @@ class Phphooks
      * write multiple hooks off.
      *
      * @since 1.0
-     * 
+     *
      * @param array $tags. The name of the hooks.
      */
     public function unset_hooks($tags)
@@ -86,7 +86,7 @@ class Phphooks
      * load plugins from specific folder, includes *.plugin.php files.
      *
      * @since 1.0
-     * 
+     *
      * @param string $from_folder optional. load plugins from folder, if no argument is supplied, a 'plugins/' constant will be used
      */
     public function load_plugins($from_folder = PLUGINS_FOLDER)
@@ -108,7 +108,7 @@ class Phphooks
 
     /**
      * return the all plugins ,which is stored in the plugin folder, header information.
-     * 
+     *
      * @since 1.1
      *
      * @param string $from_folder optional. load plugins from folder, if no argument is supplied, a 'plugins/' constant will be used
@@ -155,7 +155,7 @@ class Phphooks
      * attach custom function to hook.
      *
      * @since 1.0
-     * 
+     *
      * @param string $tag.      The name of the hook.
      * @param string $function. The function you wish to be called.
      * @param int    $priority  optional. Used to specify the order in which the functions associated with a particular action are executed (default: 10). Lower numbers correspond with earlier execution, and functions with the same priority are executed in the order in which they were added to the action.
@@ -174,7 +174,7 @@ class Phphooks
      * check whether any function is attached to hook.
      *
      * @since 1.0
-     * 
+     *
      * @param string $tag The name of the hook.
      */
     public function hook_exist($tag)
@@ -188,7 +188,7 @@ class Phphooks
      * execute all functions which are attached to hook, you can provide argument (or arguments via array).
      *
      * @since 1.0
-     * 
+     *
      * @param string $tag. The name of the hook.
      * @param mix    $args optional.The arguments the function accept (default none)
      */
@@ -212,7 +212,7 @@ class Phphooks
      * filter $args and after modify, return it. (or arguments via array).
      *
      * @since 1.0
-     * 
+     *
      * @param string $tag. The name of the hook.
      * @param mix    $args optional.The arguments the function accept to filter(default none)
      *
@@ -240,7 +240,7 @@ class Phphooks
      * register plugin data in $this->plugin.
      *
      * @since 1.0
-     * 
+     *
      * @param string $plugin_id. The name of the plugin.
      * @param array  $data       optional.The data the plugin accessorial(default none)
      */
