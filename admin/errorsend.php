@@ -840,8 +840,6 @@ class RollbarNotifier
         } else {
             return $this->_person_data;
         }
-
-        return;
     }
 
     protected function build_base_data($level = 'error')
