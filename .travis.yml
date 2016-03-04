@@ -8,3 +8,8 @@ php:
   - 5.6
   - hhvm
   - nightly
+  
+before_install:
+ - pip install codecov
+after_success:
+  - codecov --token=06603794-3714-4948-a0bc-b740621cb59c
