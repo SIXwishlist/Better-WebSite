@@ -4,7 +4,8 @@
 [![Code Issues](https://www.quantifiedcode.com/api/v1/project/901eaa2be4934f6a89a4ef874ee28239/badge.svg)](https://www.quantifiedcode.com/app/project/901eaa2be4934f6a89a4ef874ee28239)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Tecflare-Corporation/mSite?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/80d424e7f98749549cc314b4fc827abd)](https://www.codacy.com/app/dodiaraculus/mSite)
-
+[![Install on DigitalOcean](http://doinstall.bearbin.net/button.svg)](http://doinstall.bearbin.net/install?url=https://github.com/alwaysontop617/Better-WebSite/
+)
 
 Tecflare Poke is a professional webpage system like wordpress.
 
