@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 namespace Stripe;
 
 class Stripe
@@ -41,7 +45,7 @@ class Stripe
 
     /**
      * @return string The API version used for requests. null if we're using the
-     *    latest version.
+     *                latest version.
      */
     public static function getApiVersion()
     {
@@ -57,7 +61,7 @@ class Stripe
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public static function getVerifySslCerts()
     {
@@ -65,7 +69,7 @@ class Stripe
     }
 
     /**
-     * @param boolean $verify
+     * @param bool $verify
      */
     public static function setVerifySslCerts($verify)
     {

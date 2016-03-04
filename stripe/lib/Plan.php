@@ -1,11 +1,15 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 namespace Stripe;
 
 class Plan extends ApiResource
 {
     /**
-     * @param string $id The ID of the plan to retrieve.
+     * @param string            $id   The ID of the plan to retrieve.
      * @param array|string|null $opts
      *
      * @return Plan
@@ -16,7 +20,7 @@ class Plan extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $opts
      *
      * @return Plan The created plan.
@@ -27,7 +31,7 @@ class Plan extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $opts
      *
      * @return Plan The deleted plan.
@@ -48,7 +52,7 @@ class Plan extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $opts
      *
      * @return Collection of Plans

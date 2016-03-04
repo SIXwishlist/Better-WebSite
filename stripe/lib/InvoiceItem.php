@@ -1,11 +1,15 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 namespace Stripe;
 
 class InvoiceItem extends ApiResource
 {
     /**
-     * @param string $id The ID of the invoice item to retrieve.
+     * @param string            $id   The ID of the invoice item to retrieve.
      * @param array|string|null $opts
      *
      * @return InvoiceItem
@@ -16,7 +20,7 @@ class InvoiceItem extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $opts
      *
      * @return Collection of InvoiceItems
@@ -27,7 +31,7 @@ class InvoiceItem extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $opts
      *
      * @return InvoiceItem The created invoice item.
@@ -48,7 +52,7 @@ class InvoiceItem extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $opts
      *
      * @return InvoiceItem The deleted invoice item.

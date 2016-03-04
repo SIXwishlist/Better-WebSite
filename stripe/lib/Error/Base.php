@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 namespace Stripe\Error;
 
 use Exception;
@@ -52,9 +56,10 @@ abstract class Base extends Exception
 
     public function __toString()
     {
-        $id = $this->requestId ? " from API request '{$this->requestId}'": "";
+        $id = $this->requestId ? " from API request '{$this->requestId}'" : '';
         $message = explode("\n", parent::__toString());
         $message[0] .= $id;
+
         return implode("\n", $message);
     }
 }

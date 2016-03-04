@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 namespace Stripe;
 
 class ApplicationFee extends ApiResource
@@ -16,7 +20,7 @@ class ApplicationFee extends ApiResource
     }
 
     /**
-     * @param string $id The ID of the application fee to retrieve.
+     * @param string            $id   The ID of the application fee to retrieve.
      * @param array|string|null $opts
      *
      * @return ApplicationFee
@@ -27,7 +31,7 @@ class ApplicationFee extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $opts
      *
      * @return Collection of ApplicationFees
@@ -38,16 +42,17 @@ class ApplicationFee extends ApiResource
     }
 
     /**
-     * @param array|null $params
+     * @param array|null        $params
      * @param array|string|null $opts
      *
      * @return ApplicationFee The refunded application fee.
      */
     public function refund($params = null, $opts = null)
     {
-        $url = $this->instanceUrl() . '/refund';
+        $url = $this->instanceUrl().'/refund';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
+
         return $this;
     }
 }

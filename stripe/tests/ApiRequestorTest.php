@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 namespace Stripe;
 
 class ApiRequestorTest extends TestCase
@@ -10,18 +14,18 @@ class ApiRequestorTest extends TestCase
         $method = $reflector->getMethod('_encodeObjects');
         $method->setAccessible(true);
 
-        $a = array('customer' => new Customer('abcd'));
+        $a = ['customer' => new Customer('abcd')];
         $enc = $method->invoke(null, $a);
-        $this->assertSame($enc, array('customer' => 'abcd'));
+        $this->assertSame($enc, ['customer' => 'abcd']);
 
         // Preserves UTF-8
-        $v = array('customer' => "☃");
+        $v = ['customer' => '☃'];
         $enc = $method->invoke(null, $v);
         $this->assertSame($enc, $v);
 
         // Encodes latin-1 -> UTF-8
-        $v = array('customer' => "\xe9");
+        $v = ['customer' => "\xe9"];
         $enc = $method->invoke(null, $v);
-        $this->assertSame($enc, array('customer' => "\xc3\xa9"));
+        $this->assertSame($enc, ['customer' => "\xc3\xa9"]);
     }
 }

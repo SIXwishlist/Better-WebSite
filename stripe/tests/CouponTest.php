@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 namespace Stripe;
 
 class CouponTest extends TestCase
@@ -7,14 +11,14 @@ class CouponTest extends TestCase
     public function testSave()
     {
         self::authorizeFromEnv();
-        $id = 'test_coupon-' . self::generateRandomString(20);
+        $id = 'test_coupon-'.self::generateRandomString(20);
         $c = Coupon::create(
-            array(
-                'percent_off' => 25,
-                'duration' => 'repeating',
+            [
+                'percent_off'        => 25,
+                'duration'           => 'repeating',
                 'duration_in_months' => 5,
-                'id' => $id,
-            )
+                'id'                 => $id,
+            ]
         );
         $this->assertSame($id, $c->id);
         // @codingStandardsIgnoreStart

@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 namespace Stripe;
 
 /**
@@ -29,13 +33,13 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $this->call = 0;
     }
 
-    protected function mockRequest($method, $path, $params = array(), $return = array('id' => 'myId'), $rcode = 200)
+    protected function mockRequest($method, $path, $params = [], $return = ['id' => 'myId'], $rcode = 200)
     {
         $mock = $this->setUpMockRequest();
         $mock->expects($this->at($this->call++))
              ->method('request')
-             ->with(strtolower($method), 'https://api.stripe.com' . $path, $this->anything(), $params, false)
-             ->willReturn(array(json_encode($return), $rcode, array()));
+             ->with(strtolower($method), 'https://api.stripe.com'.$path, $this->anything(), $params, false)
+             ->willReturn([json_encode($return), $rcode, []]);
     }
 
     private function setUpMockRequest()
@@ -45,101 +49,102 @@ class TestCase extends \PHPUnit_Framework_TestCase
             $this->mock = $this->getMock('\Stripe\HttpClient\ClientInterface');
             ApiRequestor::setHttpClient($this->mock);
         }
+
         return $this->mock;
     }
 
     /**
      * Create a valid test charge.
      */
-    protected static function createTestCharge(array $attributes = array())
+    protected static function createTestCharge(array $attributes = [])
     {
         self::authorizeFromEnv();
 
         return Charge::create(
-            $attributes + array(
-                'amount' => 2000,
-                'currency' => 'usd',
+            $attributes + [
+                'amount'      => 2000,
+                'currency'    => 'usd',
                 'description' => 'Charge for test@example.com',
-                'card' => array(
-                    'number' => '4242424242424242',
+                'card'        => [
+                    'number'    => '4242424242424242',
                     'exp_month' => 5,
-                    'exp_year' => date('Y') + 3,
-                ),
-            )
+                    'exp_year'  => date('Y') + 3,
+                ],
+            ]
         );
     }
 
     /**
      * Create a valid test charge.
      */
-    protected static function createTestTransfer(array $attributes = array())
+    protected static function createTestTransfer(array $attributes = [])
     {
         self::authorizeFromEnv();
 
         $recipient = self::createTestRecipient();
 
         return Transfer::create(
-            $attributes + array(
-                'amount' => 2000,
-                'currency' => 'usd',
+            $attributes + [
+                'amount'      => 2000,
+                'currency'    => 'usd',
                 'description' => 'Transfer to test@example.com',
-                'recipient' => $recipient->id
-            )
+                'recipient'   => $recipient->id,
+            ]
         );
     }
 
     /**
      * Create a valid test customer.
      */
-    protected static function createTestCustomer(array $attributes = array())
+    protected static function createTestCustomer(array $attributes = [])
     {
         self::authorizeFromEnv();
 
         return Customer::create(
-            $attributes + array(
-                'card' => array(
-                    'number' => '4242424242424242',
+            $attributes + [
+                'card' => [
+                    'number'    => '4242424242424242',
                     'exp_month' => 5,
-                    'exp_year' => date('Y') + 3,
-                ),
-            )
+                    'exp_year'  => date('Y') + 3,
+                ],
+            ]
         );
     }
 
     /**
-     * Create a valid test recipient
+     * Create a valid test recipient.
      */
-    protected static function createTestRecipient(array $attributes = array())
+    protected static function createTestRecipient(array $attributes = [])
     {
         self::authorizeFromEnv();
 
         return Recipient::create(
-            $attributes + array(
-                'name' => 'PHP Test',
-                'type' => 'individual',
-                'tax_id' => '000000000',
-                'bank_account' => array(
-                    'country'    => 'US',
-                    'routing_number' => '110000000',
-                    'account_number'  => '000123456789'
-                ),
-            )
+            $attributes + [
+                'name'         => 'PHP Test',
+                'type'         => 'individual',
+                'tax_id'       => '000000000',
+                'bank_account' => [
+                    'country'         => 'US',
+                    'routing_number'  => '110000000',
+                    'account_number'  => '000123456789',
+                ],
+            ]
         );
     }
 
     /**
-     * Create a test account
+     * Create a test account.
      */
-    protected static function createTestAccount(array $attributes = array())
+    protected static function createTestAccount(array $attributes = [])
     {
         self::authorizeFromEnv();
 
         return Account::create(
-            $attributes + array(
+            $attributes + [
                 'managed' => false,
                 'country' => 'US',
-                'email' => self::generateRandomEmail(),
-            )
+                'email'   => self::generateRandomEmail(),
+            ]
         );
     }
 
@@ -155,13 +160,13 @@ class TestCase extends \PHPUnit_Framework_TestCase
             $plan = Plan::retrieve($id);
         } catch (Error\InvalidRequest $exception) {
             $plan = Plan::create(
-                array(
-                    'id' => $id,
-                    'amount' => 0,
+                [
+                    'id'       => $id,
+                    'amount'   => 0,
                     'currency' => 'usd',
                     'interval' => 'month',
-                    'name' => 'Gold Test Plan',
-                )
+                    'name'     => 'Gold Test Plan',
+                ]
             );
         }
     }
@@ -178,17 +183,17 @@ class TestCase extends \PHPUnit_Framework_TestCase
             $coupon = Coupon::retrieve($id);
         } catch (Error\InvalidRequest $exception) {
             $coupon = Coupon::create(
-                array(
-                    'id' => $id,
-                    'duration' => 'forever',
+                [
+                    'id'          => $id,
+                    'duration'    => 'forever',
                     'percent_off' => 25,
-                )
+                ]
             );
         }
     }
 
     /**
-     * Genereate a semi-random string
+     * Genereate a semi-random string.
      */
     protected static function generateRandomString($length = 24)
     {
@@ -198,6 +203,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
+
         return $randomString;
     }
 
@@ -212,13 +218,14 @@ class TestCase extends \PHPUnit_Framework_TestCase
     protected static function createTestBitcoinReceiver($email)
     {
         $receiver = BitcoinReceiver::create(
-            array(
-                'amount' => 100,
-                'currency' => 'usd',
+            [
+                'amount'      => 100,
+                'currency'    => 'usd',
                 'description' => 'some details',
-                'email' => $email
-            )
+                'email'       => $email,
+            ]
         );
+
         return $receiver;
     }
 }
