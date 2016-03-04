@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 namespace Stripe;
 
 class Collection extends ApiResource
@@ -9,6 +13,7 @@ class Collection extends ApiResource
         list($url, $params) = $this->extractPathAndUpdateParams($params);
 
         list($response, $opts) = $this->_request('get', $url, $params, $opts);
+
         return Util\Util::convertToStripeObject($response, $opts);
     }
 
@@ -17,6 +22,7 @@ class Collection extends ApiResource
         list($url, $params) = $this->extractPathAndUpdateParams($params);
 
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
+
         return Util\Util::convertToStripeObject($response, $opts);
     }
 
@@ -32,6 +38,7 @@ class Collection extends ApiResource
             $params,
             $opts
         );
+
         return Util\Util::convertToStripeObject($response, $opts);
     }
 
@@ -45,12 +52,12 @@ class Collection extends ApiResource
         if (isset($url['query'])) {
             // If the URL contains a query param, parse it out into $params so they
             // don't interact weirdly with each other.
-            $query = array();
+            $query = [];
             parse_str($url['query'], $query);
             // PHP 5.2 doesn't support the ?: operator :(
-            $params = array_merge($params ? $params : array(), $query);
+            $params = array_merge($params ? $params : [], $query);
         }
 
-        return array($url['path'], $params);
+        return [$url['path'], $params];
     }
 }

@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 namespace Stripe;
 
 class ChargeTest extends TestCase
@@ -15,18 +19,18 @@ class ChargeTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $card = array(
-            'number' => '4242424242424242',
+        $card = [
+            'number'    => '4242424242424242',
             'exp_month' => 5,
-            'exp_year' => date('Y') + 1
-        );
+            'exp_year'  => date('Y') + 1,
+        ];
 
         $c = Charge::create(
-            array(
-                'amount' => 100,
+            [
+                'amount'   => 100,
                 'currency' => 'usd',
-                'card' => $card
-            )
+                'card'     => $card,
+            ]
         );
         $this->assertTrue($c->paid);
         $this->assertFalse($c->refunded);
@@ -36,21 +40,21 @@ class ChargeTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $card = array(
-            'number' => '4242424242424242',
+        $card = [
+            'number'    => '4242424242424242',
             'exp_month' => 5,
-            'exp_year' => date('Y') + 1
-        );
+            'exp_year'  => date('Y') + 1,
+        ];
 
         $c = Charge::create(
-            array(
-                'amount' => 100,
+            [
+                'amount'   => 100,
                 'currency' => 'usd',
-                'card' => $card
-            ),
-            array(
+                'card'     => $card,
+            ],
+            [
                 'idempotency_key' => self::generateRandomString(),
-            )
+            ]
         );
 
         $this->assertTrue($c->paid);
@@ -61,18 +65,18 @@ class ChargeTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $card = array(
-            'number' => '4242424242424242',
+        $card = [
+            'number'    => '4242424242424242',
             'exp_month' => 5,
-            'exp_year' => date('Y') + 1
-        );
+            'exp_year'  => date('Y') + 1,
+        ];
 
         $c = Charge::create(
-            array(
-                'amount' => 100,
+            [
+                'amount'   => 100,
                 'currency' => 'usd',
-                'card' => $card
-            )
+                'card'     => $card,
+            ]
         );
         $d = Charge::retrieve($c->id);
         $this->assertSame($d->id, $c->id);
@@ -82,18 +86,18 @@ class ChargeTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $card = array(
-            'number' => '4242424242424242',
+        $card = [
+            'number'    => '4242424242424242',
             'exp_month' => 5,
-            'exp_year' => date('Y') + 1
-        );
+            'exp_year'  => date('Y') + 1,
+        ];
 
         $charge = Charge::create(
-            array(
-                'amount' => 100,
+            [
+                'amount'   => 100,
                 'currency' => 'usd',
-                'card' => $card
-            )
+                'card'     => $card,
+            ]
         );
 
         $charge->metadata['test'] = 'foo bar';
@@ -107,21 +111,21 @@ class ChargeTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $card = array(
-            'number' => '4242424242424242',
+        $card = [
+            'number'    => '4242424242424242',
             'exp_month' => 5,
-            'exp_year' => date('Y') + 1
-        );
+            'exp_year'  => date('Y') + 1,
+        ];
 
         $charge = Charge::create(
-            array(
-                'amount' => 100,
+            [
+                'amount'   => 100,
                 'currency' => 'usd',
-                'card' => $card
-            )
+                'card'     => $card,
+            ]
         );
 
-        $charge->metadata = array('test' => 'foo bar');
+        $charge->metadata = ['test' => 'foo bar'];
         $charge->save();
 
         $updatedCharge = Charge::retrieve($charge->id);
@@ -132,18 +136,18 @@ class ChargeTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $card = array(
-            'number' => '4242424242424242',
+        $card = [
+            'number'    => '4242424242424242',
             'exp_month' => 5,
-            'exp_year' => date('Y') + 1
-        );
+            'exp_year'  => date('Y') + 1,
+        ];
 
         $charge = Charge::create(
-            array(
-                'amount' => 100,
+            [
+                'amount'   => 100,
                 'currency' => 'usd',
-                'card' => $card
-            )
+                'card'     => $card,
+            ]
         );
 
         $charge->refunds->create();
@@ -160,19 +164,19 @@ class ChargeTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $receiver = $this->createTestBitcoinReceiver("do+fill_now@stripe.com");
+        $receiver = $this->createTestBitcoinReceiver('do+fill_now@stripe.com');
 
         $charge = Charge::create(
-            array(
-                'amount' => 100,
+            [
+                'amount'   => 100,
                 'currency' => 'usd',
-                'source' => $receiver->id
-            )
+                'source'   => $receiver->id,
+            ]
         );
 
         $this->assertSame($receiver->id, $charge->source->id);
-        $this->assertSame("bitcoin_receiver", $charge->source->object);
-        $this->assertSame("succeeded", $charge->status);
+        $this->assertSame('bitcoin_receiver', $charge->source->object);
+        $this->assertSame('succeeded', $charge->status);
         $this->assertInstanceOf('Stripe\\BitcoinReceiver', $charge->source);
     }
 
@@ -180,18 +184,18 @@ class ChargeTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $card = array(
-            'number' => '4242424242424242',
+        $card = [
+            'number'    => '4242424242424242',
             'exp_month' => 5,
-            'exp_year' => date('Y') + 1
-        );
+            'exp_year'  => date('Y') + 1,
+        ];
 
         $charge = Charge::create(
-            array(
-                'amount' => 100,
+            [
+                'amount'   => 100,
                 'currency' => 'usd',
-                'card' => $card
-            )
+                'card'     => $card,
+            ]
         );
 
         $charge->markAsSafe();

@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 namespace Stripe;
 
 class TransferTest extends TestCase
@@ -9,11 +13,11 @@ class TransferTest extends TestCase
         $recipient = self::createTestRecipient();
 
         self::authorizeFromEnv();
-        $transfer = Transfer::create(array(
-            'amount' => 100,
-            'currency' => 'usd',
-            'recipient' => $recipient->id
-        ));
+        $transfer = Transfer::create([
+            'amount'    => 100,
+            'currency'  => 'usd',
+            'recipient' => $recipient->id,
+        ]);
         $this->assertSame('pending', $transfer->status);
     }
 
@@ -22,11 +26,11 @@ class TransferTest extends TestCase
         $recipient = self::createTestRecipient();
 
         self::authorizeFromEnv();
-        $transfer = Transfer::create(array(
-            'amount' => 100,
-            'currency' => 'usd',
-            'recipient' => $recipient->id
-        ));
+        $transfer = Transfer::create([
+            'amount'    => 100,
+            'currency'  => 'usd',
+            'recipient' => $recipient->id,
+        ]);
         $reloaded = Transfer::retrieve($transfer->id);
         $this->assertSame($reloaded->id, $transfer->id);
     }
@@ -39,11 +43,11 @@ class TransferTest extends TestCase
         $recipient = self::createTestRecipient();
 
         self::authorizeFromEnv();
-        $transfer = Transfer::create(array(
-            'amount' => 100,
-            'currency' => 'usd',
-            'recipient' => $recipient->id
-        ));
+        $transfer = Transfer::create([
+            'amount'    => 100,
+            'currency'  => 'usd',
+            'recipient' => $recipient->id,
+        ]);
         $reloaded = Transfer::retrieve($transfer->id);
         $this->assertSame($reloaded->id, $transfer->id);
 
@@ -55,11 +59,11 @@ class TransferTest extends TestCase
         $recipient = self::createTestRecipient();
 
         self::authorizeFromEnv();
-        $transfer = Transfer::create(array(
-            'amount' => 100,
-            'currency' => 'usd',
-            'recipient' => $recipient->id
-        ));
+        $transfer = Transfer::create([
+            'amount'    => 100,
+            'currency'  => 'usd',
+            'recipient' => $recipient->id,
+        ]);
 
         $transfer->metadata['test'] = 'foo bar';
         $transfer->save();
@@ -73,13 +77,13 @@ class TransferTest extends TestCase
         $recipient = self::createTestRecipient();
 
         self::authorizeFromEnv();
-        $transfer = Transfer::create(array(
-            'amount' => 100,
-            'currency' => 'usd',
-            'recipient' => $recipient->id
-        ));
+        $transfer = Transfer::create([
+            'amount'    => 100,
+            'currency'  => 'usd',
+            'recipient' => $recipient->id,
+        ]);
 
-        $transfer->metadata = array('test' => 'foo bar');
+        $transfer->metadata = ['test' => 'foo bar'];
         $transfer->save();
 
         $updatedTransfer = Transfer::retrieve($transfer->id);
@@ -101,7 +105,7 @@ class TransferTest extends TestCase
     {
         $recipient = self::createTestRecipient();
 
-        $recipient->metadata = array('test' => 'foo bar');
+        $recipient->metadata = ['test' => 'foo bar'];
         $recipient->save();
 
         $updatedRecipient = Recipient::retrieve($recipient->id);

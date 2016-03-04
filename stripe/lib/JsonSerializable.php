@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 namespace Stripe;
 
 // JsonSerializable only exists in PHP 5.4+. Stub if out if it doesn't exist

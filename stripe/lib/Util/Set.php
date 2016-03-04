@@ -1,17 +1,21 @@
 <?php
 
+/*
+ * Tecflare Corporation Property
+ */
+
 namespace Stripe\Util;
 
-use IteratorAggregate;
 use ArrayIterator;
+use IteratorAggregate;
 
 class Set implements IteratorAggregate
 {
     private $_elts;
 
-    public function __construct($members = array())
+    public function __construct($members = [])
     {
-        $this->_elts = array();
+        $this->_elts = [];
         foreach ($members as $item) {
             $this->_elts[$item] = true;
         }
