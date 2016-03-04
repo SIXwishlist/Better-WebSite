@@ -1,7 +1,6 @@
 if [ ! -z "$1" ]; then
 echo "Automated Selected";
-sudo apt-get -qq update
-sudo apt-get -qq install php5
+
 cd test
 echo Testing PHP Please Wait
 OUTPUT="$(find ../ -iname "*.php" -exec php -l {} \; )";
