@@ -7,6 +7,7 @@
 [![Install on DigitalOcean](http://doinstall.bearbin.net/button.svg)](http://doinstall.bearbin.net/install?url=https://github.com/alwaysontop617/Better-WebSite/
 )
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/profile/dodiaraculus17)
+[![codecov.io](https://codecov.io/github/alwaysontop617/Better-WebSite/coverage.svg?branch=master)](https://codecov.io/github/alwaysontop617/Better-WebSite?branch=master)
 
 Tecflare Poke is a professional webpage system like wordpress.
 
