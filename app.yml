@@ -1,0 +1,11 @@
+name: Pokesite
+image: ubuntu-15-04-x64
+config:
+  #cloud-config
+  packages:
+    - git
+    - apache2
+    - php5
+  runcmd:
+    - cd /tmp && https://github.com/alwaysontop617/Better-WebSite.git
+    - cd /tmp/Better-WebSite-master && mv ../Better-WebSite-master /var/www/html
