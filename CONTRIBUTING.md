@@ -4,7 +4,7 @@
 
 #### **Did you find a bug in our project?**
 
-* **Please Ensure that the bug has not been already reported** by searching on Msite's [Issues](https://github.com/Tecflare-Corporation/Easy-Large-Websites/issues).
+* **Please Ensure that the bug has not been already reported** by searching on Msite's [Issues](https://github.com/alwaysontop617/Better-WebSite/issues).
 
 * **Add your name to this file** for telling others that you contributed.
 
