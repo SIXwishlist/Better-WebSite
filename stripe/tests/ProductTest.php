@@ -1,12 +1,8 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
-class ProductTest extends TestCase
+class ProductSKUOrderTest extends TestCase
 {
     public function testProductFalseyId()
     {
@@ -23,13 +19,14 @@ class ProductTest extends TestCase
 
     public function testProductCreateUpdateRead()
     {
+
         Stripe::setApiKey('sk_test_JieJALRz7rPz7boV17oMma7a');
-        $ProductID = 'gold-'.self::generateRandomString(20);
-        $p = Product::create([
+        $ProductID = 'gold-' . self::generateRandomString(20);
+        $p = Product::create(array(
             'name'     => 'Gold Product',
             'id'       => $ProductID,
-            'url'      => 'www.stripe.com/gold',
-        ]);
+            'url'      => 'www.stripe.com/gold'
+        ));
         $this->assertSame($p->url, 'www.stripe.com/gold');
 
         $p->name = 'A new Product name';
@@ -45,24 +42,24 @@ class ProductTest extends TestCase
     public function testSKUCreateUpdateRead()
     {
         Stripe::setApiKey('sk_test_JieJALRz7rPz7boV17oMma7a');
-        $ProductID = 'silver-'.self::generateRandomString(20);
-        $p = Product::create([
+        $ProductID = 'silver-' . self::generateRandomString(20);
+        $p = Product::create(array(
             'name'     => 'Silver Product',
             'id'       => $ProductID,
-            'url'      => 'www.stripe.com/silver',
-        ]);
+            'url'      => 'www.stripe.com/silver'
+        ));
 
-        $SkuID = 'silver-sku-'.self::generateRandomString(20);
-        $sku = SKU::create([
+        $SkuID = 'silver-sku-' . self::generateRandomString(20);
+        $sku = SKU::create(array(
             'price'     => 500,
             'currency'  => 'usd',
             'id'        => $SkuID,
-            'inventory' => [
+            'inventory' => array(
                 'type'     => 'finite',
-                'quantity' => 40,
-            ],
-            'product'   => $ProductID,
-        ]);
+                'quantity' => 40
+            ),
+            'product'   => $ProductID
+        ));
 
         $sku->price = 600;
         $sku->save();
@@ -77,51 +74,51 @@ class ProductTest extends TestCase
     public function testOrderCreateUpdateRetrievePay()
     {
         Stripe::setApiKey('sk_test_JieJALRz7rPz7boV17oMma7a');
-        $ProductID = 'silver-'.self::generateRandomString(20);
-        $p = Product::create([
+        $ProductID = 'silver-' . self::generateRandomString(20);
+        $p = Product::create(array(
             'name'      => 'Silver Product',
             'id'        => $ProductID,
             'url'       => 'www.stripe.com/silver',
             'shippable' => false,
-        ]);
+        ));
 
-        $SkuID = 'silver-sku-'.self::generateRandomString(20);
-        $sku = SKU::create([
+        $SkuID = 'silver-sku-' . self::generateRandomString(20);
+        $sku = SKU::create(array(
             'price'     => 500,
             'currency'  => 'usd',
             'id'        => $SkuID,
-            'inventory' => [
+            'inventory' => array(
                 'type'     => 'finite',
-                'quantity' => 40,
-            ],
-            'product'   => $ProductID,
-        ]);
+                'quantity' => 40
+            ),
+            'product'   => $ProductID
+        ));
 
-        $order = Order::create([
-            'items' => [
-                0 => [
-                    'type'   => 'sku',
+        $order = Order::create(array(
+            'items' => array(
+                0 => array(
+                    'type' => 'sku',
                     'parent' => $SkuID,
-                ],
-            ],
+                ),
+            ),
             'currency' => 'usd',
-            'email'    => 'foo@bar.com',
-        ]);
+            'email' => 'foo@bar.com',
+        ));
 
-        $order->metadata->foo = 'bar';
+        $order->metadata->foo = "bar";
         $order->save();
 
         $stripeOrder = Order::retrieve($order->id);
-        $this->assertSame($order->metadata->foo, 'bar');
+        $this->assertSame($order->metadata->foo, "bar");
 
-        $order->pay([
-            'source' => [
-                'object'    => 'card',
-                'number'    => '4242424242424242',
+        $order->pay(array(
+            'source' => array(
+                'object' => 'card',
+                'number' => '4242424242424242',
                 'exp_month' => '05',
-                'exp_year'  => '2017',
-            ],
-        ]);
+                'exp_year' => '2017'
+            ),
+        ));
         $this->assertSame($order->status, 'paid');
     }
 }

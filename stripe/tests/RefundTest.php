@@ -1,17 +1,14 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class RefundTest extends TestCase
 {
+
     public function testCreate()
     {
         $charge = self::createTestCharge();
-        $refund = Refund::create(['amount' => 100, 'charge' => $charge->id]);
+        $refund = Refund::create(array('amount' => 100, 'charge' => $charge->id));
         $this->assertSame(100, $refund->amount);
         $this->assertSame($charge->id, $refund->charge);
     }
@@ -19,20 +16,20 @@ class RefundTest extends TestCase
     public function testUpdateAndRetrieve()
     {
         $charge = self::createTestCharge();
-        $ref = Refund::create(['amount' => 100, 'charge' => $charge->id]);
-        $ref->metadata['key'] = 'value';
+        $ref = Refund::create(array('amount' => 100, 'charge' => $charge->id));
+        $ref->metadata["key"] = "value";
         $ref->save();
         $ref = Refund::retrieve($ref->id);
-        $this->assertSame('value', $ref->metadata['key'], 'value');
+        $this->assertSame("value", $ref->metadata["key"], "value");
     }
 
     public function testListForCharge()
     {
         $charge = self::createTestCharge();
-        $refA = Refund::create(['amount' => 100, 'charge' => $charge->id]);
-        $refB = Refund::create(['amount' => 50, 'charge' => $charge->id]);
+        $refA = Refund::create(array('amount' => 100, 'charge' => $charge->id));
+        $refB = Refund::create(array('amount' => 50, 'charge' => $charge->id));
 
-        $all = Refund::all(['charge' => $charge]);
+        $all = Refund::all(array('charge' => $charge));
         $this->assertSame(false, $all['has_more']);
         $this->assertSame(2, count($all->data));
         $this->assertSame($refB->id, $all->data[0]->id);
@@ -52,23 +49,23 @@ class RefundTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $receiver = $this->createTestBitcoinReceiver('do+fill_now@stripe.com');
+        $receiver = $this->createTestBitcoinReceiver("do+fill_now@stripe.com");
 
         $charge = Charge::create(
-            [
-                'amount'      => $receiver->amount,
-                'currency'    => $receiver->currency,
+            array(
+                'amount' => $receiver->amount,
+                'currency' => $receiver->currency,
                 'description' => $receiver->description,
-                'source'      => $receiver->id,
-            ]
+                'source' => $receiver->id
+            )
         );
 
         $ref = Refund::create(
-            [
-                'amount'         => $receiver->amount,
+            array(
+                'amount' => $receiver->amount,
                 'refund_address' => 'ABCDEF',
-                'charge'         => $charge->id,
-            ]
+                'charge' => $charge->id
+            )
         );
         $this->assertSame($receiver->amount, $ref->amount);
         $this->assertNotNull($ref->id);
@@ -79,7 +76,7 @@ class RefundTest extends TestCase
     public function testCreateViaCharge()
     {
         $charge = self::createTestCharge();
-        $ref = $charge->refunds->create(['amount' => 100]);
+        $ref = $charge->refunds->create(array('amount' => 100));
         $this->assertSame(100, $ref->amount);
         $this->assertSame($charge->id, $ref->charge);
     }
@@ -87,18 +84,18 @@ class RefundTest extends TestCase
     public function testUpdateAndRetrieveViaCharge()
     {
         $charge = self::createTestCharge();
-        $ref = $charge->refunds->create(['amount' => 100]);
-        $ref->metadata['key'] = 'value';
+        $ref = $charge->refunds->create(array('amount' => 100));
+        $ref->metadata["key"] = "value";
         $ref->save();
         $ref = $charge->refunds->retrieve($ref->id);
-        $this->assertSame('value', $ref->metadata['key'], 'value');
+        $this->assertSame("value", $ref->metadata["key"], "value");
     }
 
     public function testListViaCharge()
     {
         $charge = self::createTestCharge();
-        $refA = $charge->refunds->create(['amount' => 50]);
-        $refB = $charge->refunds->create(['amount' => 50]);
+        $refA = $charge->refunds->create(array('amount' => 50));
+        $refB = $charge->refunds->create(array('amount' => 50));
 
         $all = $charge->refunds->all();
         $this->assertSame(false, $all['has_more']);
@@ -111,22 +108,22 @@ class RefundTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $receiver = $this->createTestBitcoinReceiver('do+fill_now@stripe.com');
+        $receiver = $this->createTestBitcoinReceiver("do+fill_now@stripe.com");
 
         $charge = Charge::create(
-            [
-                'amount'      => $receiver->amount,
-                'currency'    => $receiver->currency,
+            array(
+                'amount' => $receiver->amount,
+                'currency' => $receiver->currency,
                 'description' => $receiver->description,
-                'source'      => $receiver->id,
-            ]
+                'source' => $receiver->id
+            )
         );
 
         $ref = $charge->refunds->create(
-            [
-                'amount'         => $receiver->amount,
-                'refund_address' => 'ABCDEF',
-            ]
+            array(
+                'amount' => $receiver->amount,
+                'refund_address' => 'ABCDEF'
+            )
         );
         $this->assertSame($receiver->amount, $ref->amount);
         $this->assertNotNull($ref->id);

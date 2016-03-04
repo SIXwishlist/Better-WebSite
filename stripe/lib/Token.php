@@ -1,15 +1,11 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class Token extends ApiResource
 {
     /**
-     * @param string            $id   The ID of the token to retrieve.
+     * @param string $id The ID of the token to retrieve.
      * @param array|string|null $opts
      *
      * @return Token
@@ -20,7 +16,7 @@ class Token extends ApiResource
     }
 
     /**
-     * @param array|null        $params
+     * @param array|null $params
      * @param array|string|null $opts
      *
      * @return Token The created token.

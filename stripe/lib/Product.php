@@ -1,15 +1,11 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class Product extends ApiResource
 {
     /**
-     * @param string            $id   The ID of the Product to retrieve.
+     * @param string $id The ID of the Product to retrieve.
      * @param array|string|null $opts
      *
      * @return Product
@@ -20,7 +16,7 @@ class Product extends ApiResource
     }
 
     /**
-     * @param array|null        $params
+     * @param array|null $params
      * @param array|string|null $opts
      *
      * @return Product The created Product.
@@ -41,7 +37,7 @@ class Product extends ApiResource
     }
 
     /**
-     * @param array|null        $params
+     * @param array|null $params
      * @param array|string|null $opts
      *
      * @return Collection of Products

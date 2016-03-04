@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class ApplicationFeeTest extends TestCase

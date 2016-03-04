@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class BitcoinReceiverTest extends TestCase
@@ -21,7 +17,7 @@ class BitcoinReceiverTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $receiver = $this->createTestBitcoinReceiver('do+fill_now@stripe.com');
+        $receiver = $this->createTestBitcoinReceiver("do+fill_now@stripe.com");
 
         $this->assertSame(100, $receiver->amount);
         $this->assertNotNull($receiver->id);
@@ -31,7 +27,7 @@ class BitcoinReceiverTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $receiver = $this->createTestBitcoinReceiver('do+fill_now@stripe.com');
+        $receiver = $this->createTestBitcoinReceiver("do+fill_now@stripe.com");
 
         $r = BitcoinReceiver::retrieve($receiver->id);
         $this->assertSame($receiver->id, $r->id);
@@ -43,7 +39,7 @@ class BitcoinReceiverTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $receiver = $this->createTestBitcoinReceiver('do+fill_now@stripe.com');
+        $receiver = $this->createTestBitcoinReceiver("do+fill_now@stripe.com");
 
         $receivers = BitcoinReceiver::all();
         $this->assertTrue(count($receivers->data) > 0);
@@ -53,23 +49,23 @@ class BitcoinReceiverTest extends TestCase
     {
         self::authorizeFromEnv();
 
-        $receiver = $this->createTestBitcoinReceiver('do+fill_now@stripe.com');
+        $receiver = $this->createTestBitcoinReceiver("do+fill_now@stripe.com");
         $this->assertSame(0, count($receiver->transactions->data));
 
-        $transactions = $receiver->transactions->all(['limit' => 1]);
+        $transactions = $receiver->transactions->all(array("limit" => 1));
         $this->assertSame(1, count($transactions->data));
     }
 
     public function testDeleteWithCustomer()
     {
         self::authorizeFromEnv();
-        $receiver = $this->createTestBitcoinReceiver('do+fill_now@stripe.com');
-        $customer = Customer::create(['source' => $receiver->id]);
-        $charge = Charge::create([
-            'customer' => $customer->id,
-            'amount'   => $receiver->amount,
-            'currency' => $receiver->currency,
-        ]);
+        $receiver = $this->createTestBitcoinReceiver("do+fill_now@stripe.com");
+        $customer = Customer::create(array("source" => $receiver->id));
+        $charge = Charge::create(array(
+            "customer" => $customer->id,
+            "amount" => $receiver->amount,
+            "currency" => $receiver->currency
+        ));
         $receiver = BitcoinReceiver::retrieve($receiver->id);
         $response = $receiver->delete();
         $this->assertTrue($response->deleted);
@@ -78,11 +74,11 @@ class BitcoinReceiverTest extends TestCase
     public function testUpdateWithCustomer()
     {
         self::authorizeFromEnv();
-        $receiver = $this->createTestBitcoinReceiver('do+fill_now@stripe.com');
-        $customer = Customer::create(['source' => $receiver->id]);
+        $receiver = $this->createTestBitcoinReceiver("do+fill_now@stripe.com");
+        $customer = Customer::create(array("source" => $receiver->id));
         $receiver = BitcoinReceiver::retrieve($receiver->id);
 
-        $receiver->description = 'a new description';
+        $receiver->description = "a new description";
         $receiver->save();
 
         $base = Customer::classUrl();
@@ -91,33 +87,33 @@ class BitcoinReceiverTest extends TestCase
         $this->assertEquals("$base/$parentExtn/sources/$extn", $receiver->instanceUrl());
 
         $updatedReceiver = BitcoinReceiver::retrieve($receiver->id);
-        $this->assertEquals($receiver['description'], $updatedReceiver['description']);
+        $this->assertEquals($receiver["description"], $updatedReceiver["description"]);
     }
 
     public function testUpdateWithoutCustomer()
     {
         self::authorizeFromEnv();
-        $receiver = $this->createTestBitcoinReceiver('do+fill_now@stripe.com');
+        $receiver = $this->createTestBitcoinReceiver("do+fill_now@stripe.com");
 
-        $receiver->description = 'a new description';
+        $receiver->description = "a new description";
         $receiver->save();
 
-        $this->assertEquals(BitcoinReceiver::classUrl().'/'.$receiver['id'], $receiver->instanceUrl());
+        $this->assertEquals(BitcoinReceiver::classUrl() . "/" . $receiver['id'], $receiver->instanceUrl());
 
         $updatedReceiver = BitcoinReceiver::retrieve($receiver->id);
-        $this->assertEquals($receiver['description'], $updatedReceiver['description']);
+        $this->assertEquals($receiver["description"], $updatedReceiver["description"]);
     }
 
     public function testRefund()
     {
         self::authorizeFromEnv();
-        $receiver = $this->createTestBitcoinReceiver('do+fill_now@stripe.com');
+        $receiver = $this->createTestBitcoinReceiver("do+fill_now@stripe.com");
 
         $receiver = BitcoinReceiver::retrieve($receiver->id);
         $this->assertNull($receiver->refund_address);
 
-        $refundAddress = 'REFUNDHERE';
-        $receiver->refund(['refund_address' => $refundAddress]);
+        $refundAddress = "REFUNDHERE";
+        $receiver->refund(array("refund_address" => $refundAddress));
 
         $this->assertSame($refundAddress, $receiver->refund_address);
     }

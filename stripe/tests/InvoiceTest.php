@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class InvoiceTest extends TestCase
@@ -13,15 +9,15 @@ class InvoiceTest extends TestCase
         self::authorizeFromEnv();
         $customer = self::createTestCustomer();
 
-        InvoiceItem::create([
+        InvoiceItem::create(array(
             'customer'  => $customer->id,
             'amount'    => 0,
             'currency'  => 'usd',
-        ]);
+        ));
 
-        $invoice = Invoice::upcoming([
+        $invoice = Invoice::upcoming(array(
             'customer' => $customer->id,
-        ]);
+        ));
         $this->assertSame($invoice->customer, $customer->id);
         $this->assertSame($invoice->attempted, false);
     }
@@ -31,19 +27,19 @@ class InvoiceTest extends TestCase
         self::authorizeFromEnv();
         $customer = self::createTestCustomer();
 
-        InvoiceItem::create([
+        InvoiceItem::create(array(
             'customer'  => $customer->id,
             'amount'    => 100,
             'currency'  => 'usd',
-        ]);
+        ));
 
         $invoice = Invoice::upcoming(
-            [
+            array(
             'customer' => $customer->id,
-            ]
+            )
         );
 
-        $lines = $invoice->lines->all(['limit' => 10]);
+        $lines = $invoice->lines->all(array('limit' => 10));
 
         $this->assertSame(count($lines->data), 1);
         $this->assertSame($lines->data[0]->amount, 100);

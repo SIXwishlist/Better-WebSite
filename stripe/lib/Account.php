@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class Account extends ApiResource
@@ -18,7 +14,7 @@ class Account extends ApiResource
     }
 
     /**
-     * @param string|null       $id
+     * @param string|null $id
      * @param array|string|null $opts
      *
      * @return Account
@@ -29,12 +25,11 @@ class Account extends ApiResource
             $opts = $id;
             $id = null;
         }
-
         return self::_retrieve($id, $opts);
     }
 
     /**
-     * @param array|null        $params
+     * @param array|null $params
      * @param array|string|null $opts
      *
      * @return Account
@@ -55,7 +50,7 @@ class Account extends ApiResource
     }
 
     /**
-     * @param array|null        $params
+     * @param array|null $params
      * @param array|string|null $opts
      *
      * @return Account The deleted account.
@@ -66,7 +61,7 @@ class Account extends ApiResource
     }
 
     /**
-     * @param array|null        $params
+     * @param array|null $params
      * @param array|string|null $opts
      *
      * @return Collection of Accounts

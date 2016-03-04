@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class Balance extends SingletonApiResource

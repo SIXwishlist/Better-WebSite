@@ -1,15 +1,11 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class Coupon extends ApiResource
 {
     /**
-     * @param string            $id   The ID of the coupon to retrieve.
+     * @param string $id The ID of the coupon to retrieve.
      * @param array|string|null $opts
      *
      * @return Coupon
@@ -20,7 +16,7 @@ class Coupon extends ApiResource
     }
 
     /**
-     * @param array|null        $params
+     * @param array|null $params
      * @param array|string|null $opts
      *
      * @return Coupon The created coupon.
@@ -31,7 +27,7 @@ class Coupon extends ApiResource
     }
 
     /**
-     * @param array|null        $params
+     * @param array|null $params
      * @param array|string|null $opts
      *
      * @return Coupon The deleted coupon.
@@ -52,7 +48,7 @@ class Coupon extends ApiResource
     }
 
     /**
-     * @param array|null        $params
+     * @param array|null $params
      * @param array|string|null $opts
      *
      * @return Collection of Coupons

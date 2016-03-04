@@ -1,25 +1,21 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class UtilTest extends TestCase
 {
     public function testIsList()
     {
-        $list = [5, 'nstaoush', []];
+        $list = array(5, 'nstaoush', array());
         $this->assertTrue(Util\Util::isList($list));
 
-        $notlist = [5, 'nstaoush', [], 'bar' => 'baz'];
+        $notlist = array(5, 'nstaoush', array(), 'bar' => 'baz');
         $this->assertFalse(Util\Util::isList($notlist));
     }
 
     public function testThatPHPHasValueSemanticsForArrays()
     {
-        $original = ['php-arrays' => 'value-semantics'];
+        $original = array('php-arrays' => 'value-semantics');
         $derived = $original;
         $derived['php-arrays'] = 'reference-semantics';
 
@@ -29,7 +25,7 @@ class UtilTest extends TestCase
     public function testConvertStripeObjectToArrayIncludesId()
     {
         $customer = self::createTestCustomer();
-        $this->assertTrue(array_key_exists('id', $customer->__toArray(true)));
+        $this->assertTrue(array_key_exists("id", $customer->__toArray(true)));
     }
 
     public function testUtf8()

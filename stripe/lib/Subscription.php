@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class Subscription extends ApiResource
@@ -17,7 +13,7 @@ class Subscription extends ApiResource
         $customer = $this['customer'];
         if (!$id) {
             throw new Error\InvalidRequest(
-                'Could not determine which URL to request: '.
+                "Could not determine which URL to request: " .
                 "class instance has invalid ID: $id",
                 null
             );
@@ -28,7 +24,6 @@ class Subscription extends ApiResource
         $base = Customer::classUrl();
         $customerExtn = urlencode($customer);
         $extn = urlencode($id);
-
         return "$base/$customerExtn/subscriptions/$extn";
     }
 
@@ -57,8 +52,8 @@ class Subscription extends ApiResource
      */
     public function deleteDiscount()
     {
-        $url = $this->instanceUrl().'/discount';
+        $url = $this->instanceUrl() . '/discount';
         list($response, $opts) = $this->_request('delete', $url);
-        $this->refreshFrom(['discount' => null], $opts, true);
+        $this->refreshFrom(array('discount' => null), $opts, true);
     }
 }

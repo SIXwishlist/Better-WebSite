@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class DiscountTest extends TestCase
@@ -11,16 +7,16 @@ class DiscountTest extends TestCase
     public function testDeletion()
     {
         self::authorizeFromEnv();
-        $id = 'test-coupon-'.self::generateRandomString(20);
+        $id = 'test-coupon-' . self::generateRandomString(20);
         $coupon = Coupon::create(
-            [
-                'percent_off'        => 25,
-                'duration'           => 'repeating',
+            array(
+                'percent_off' => 25,
+                'duration' => 'repeating',
                 'duration_in_months' => 5,
-                'id'                 => $id,
-            ]
+                'id' => $id,
+            )
         );
-        $customer = self::createTestCustomer(['coupon' => $id]);
+        $customer = self::createTestCustomer(array('coupon' => $id));
 
         $this->assertTrue(isset($customer->discount));
         $this->assertTrue(isset($customer->discount->coupon));

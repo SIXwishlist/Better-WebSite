@@ -1,15 +1,11 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class Transfer extends ApiResource
 {
     /**
-     * @param string            $id   The ID of the transfer to retrieve.
+     * @param string $id The ID of the transfer to retrieve.
      * @param array|string|null $opts
      *
      * @return Transfer
@@ -20,7 +16,7 @@ class Transfer extends ApiResource
     }
 
     /**
-     * @param array|null        $params
+     * @param array|null $params
      * @param array|string|null $opts
      *
      * @return Collection of Transfers
@@ -31,7 +27,7 @@ class Transfer extends ApiResource
     }
 
     /**
-     * @param array|null        $params
+     * @param array|null $params
      * @param array|string|null $opts
      *
      * @return Transfer The created transfer.
@@ -46,10 +42,9 @@ class Transfer extends ApiResource
      */
     public function reverse($params = null, $opts = null)
     {
-        $url = $this->instanceUrl().'/reversals';
+        $url = $this->instanceUrl() . '/reversals';
         list($response, $opts) = $this->_request('post', $url, $params, $options);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 
@@ -58,10 +53,9 @@ class Transfer extends ApiResource
      */
     public function cancel()
     {
-        $url = $this->instanceUrl().'/cancel';
+        $url = $this->instanceUrl() . '/cancel';
         list($response, $opts) = $this->_request('post', $url);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 

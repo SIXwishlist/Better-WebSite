@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class StripeObjectTest extends TestCase
@@ -42,7 +38,7 @@ class StripeObjectTest extends TestCase
     {
         $s = new StripeObject();
         $s->foo = 'a';
-        $this->assertSame($s->keys(), ['foo']);
+        $this->assertSame($s->keys(), array('foo'));
     }
 
     public function testToArray()

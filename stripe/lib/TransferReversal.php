@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class TransferReversal extends ApiResource
@@ -17,7 +13,7 @@ class TransferReversal extends ApiResource
         $transfer = $this['transfer'];
         if (!$id) {
             throw new Error\InvalidRequest(
-                'Could not determine which URL to request: '.
+                "Could not determine which URL to request: " .
                 "class instance has invalid ID: $id",
                 null
             );
@@ -28,7 +24,6 @@ class TransferReversal extends ApiResource
         $base = Transfer::classUrl();
         $transferExtn = urlencode($transfer);
         $extn = urlencode($id);
-
         return "$base/$transferExtn/reversals/$extn";
     }
 

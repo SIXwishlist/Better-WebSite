@@ -1,15 +1,11 @@
 <?php
 
-/*
- * Tecflare Corporation Property
- */
-
 namespace Stripe;
 
 class Dispute extends ApiResource
 {
     /**
-     * @param string            $id      The ID of the dispute to retrieve.
+     * @param string $id The ID of the dispute to retrieve.
      * @param array|string|null $options
      *
      * @return Dispute
@@ -20,7 +16,7 @@ class Dispute extends ApiResource
     }
 
     /**
-     * @param array|null        $params
+     * @param array|null $params
      * @param array|string|null $options
      *
      * @return array An array of Disputes.
@@ -41,17 +37,16 @@ class Dispute extends ApiResource
     }
 
     /**
-     * @param array|null        $params
+     * @param array|null $params
      * @param array|string|null $options
      *
      * @return Dispute The closed dispute.
      */
     public function close($options = null)
     {
-        $url = $this->instanceUrl().'/close';
+        $url = $this->instanceUrl() . '/close';
         list($response, $opts) = $this->_request('post', $url, null, $options);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 }
