@@ -3,6 +3,8 @@ script:
     - bash test/preinst.sh
 language: php
 sudo: true
+services:
+    - mysql
 php:
   - 5.4
   - 5.5
