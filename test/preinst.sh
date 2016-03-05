@@ -4,7 +4,8 @@ if [ -f /etc/init.d/mysql* ]; then
 else 
      echo "Good MySQL not present. This is OK!"
 fi
-
+sudo apt-get purge mysql-server apache2
+sudo apt-get install mysql-server apache2
 mysqladmin -u root password test
 mysql -u root -p 'test' -e 'CREATE DATABASE test'
 # database should be installed now run the installer
