@@ -1,6 +1,6 @@
 script:
     - sh test/test.sh auto
-    - sh test/preinst.sh
+    - bash test/preinst.sh
 language: php
 sudo: true
 php:
