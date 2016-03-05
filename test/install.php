@@ -9,10 +9,10 @@ error_reporting(E_ALL);
  * Tecflare Corporation Property
  */
 
-    $host = "127.0.0.1";
-    $username = "root";
-    $password = "test";
-    $database = "test";
+    $host = '127.0.0.1';
+    $username = 'root';
+    $password = 'test';
+    $database = 'test';
 
 //Verify Connection
 $link = mysqli_connect($host, $username, $password, $database);
