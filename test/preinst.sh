@@ -1,9 +1,4 @@
 #!/bin/bash
-if [ -f /etc/init.d/mysql* ]; then
-    echo "Warning MySQL not present. This is still OK!"
-else 
-     echo "Good MySQL not present. This is OK!"
-fi
 sudo apt-get purge mysql-server 
 sudo apt-get install mysql-server 
 mysqladmin -u root password test
