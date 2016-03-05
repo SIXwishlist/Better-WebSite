@@ -137,3 +137,4 @@ $data = '<?php
 /* close connection */
 mysqli_close($link);
 echo 'Finished Writing Config';
+echo "NoERR detected.";
