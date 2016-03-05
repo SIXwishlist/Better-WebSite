@@ -26,7 +26,7 @@ if (!mysqli_ping($link)) {
     header('Location: index.php?error');
     die();
 }
-$conn = new mysqli($hostname, $username, $password, $database);
+$conn = new mysqli($host, $username, $password, $database);
  $sql = 'CREATE TABLE Administrators (
 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 username VARCHAR(1000),
@@ -104,7 +104,7 @@ filename varchar(127) collate utf8_bin default NULL,
 )";
 echo 'CREATE TABLE Plugins';
 $conn->query($sql);
-$sql = "INSERT INTO Administrators (id, usename, password) VALUES ('1', '".$conn->real_escape_string(addslashes($_POST['username_p']))."', '".md5($conn->real_escape_string(password_hash($_POST['password_p'], PASSWORD_BCRYPT)))."')";
+$sql = "INSERT INTO Administrators (id, usename, password) VALUES ('1', '".$conn->real_escape_string(addslashes("test"))."', '".md5($conn->real_escape_string(addslashes("test")))."')";
 $conn->query($sql);
 $sql = "INSERT INTO Settings (id, code, value) VALUES ('1', 'title','Multisite Central')";
 $conn->query($sql);
@@ -133,8 +133,7 @@ $data = '<?php
         }
 
         fclose($handle);
-header('Location: index.php?install');
-die();
+//header('Location: index.php?install');
 /* close connection */
 mysqli_close($link);
 echo 'Finished Writing Config';
