@@ -3,11 +3,18 @@
 /*
  * Tecflare Corporation Property
  */
-
+if (!$_GET["test"])
+{
 $host = $_POST['hostname'];
 $username = $_POST['username'];
 $password = $_POST['password'];
 $database = $_POST['database'];
+} else {
+$host = "localhost";
+$username = "root";
+$password = "test";
+$database = "test";
+}
 //Verify Connection
 $link = mysqli_connect($host, $username, $password, $database);
 /* check connection */
