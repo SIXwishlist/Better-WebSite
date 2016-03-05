@@ -104,7 +104,7 @@ filename varchar(127) collate utf8_bin default NULL,
 )";
 echo 'CREATE TABLE Plugins';
 $conn->query($sql);
-$sql = "INSERT INTO Administrators (id, usename, password) VALUES ('1', '".$conn->real_escape_string(addslashes("test"))."', '".md5($conn->real_escape_string(addslashes("test")))."')";
+$sql = "INSERT INTO Administrators (id, usename, password) VALUES ('1', '".$conn->real_escape_string(addslashes('test'))."', '".md5($conn->real_escape_string(addslashes('test')))."')";
 $conn->query($sql);
 $sql = "INSERT INTO Settings (id, code, value) VALUES ('1', 'title','Multisite Central')";
 $conn->query($sql);
