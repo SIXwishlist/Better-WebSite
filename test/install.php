@@ -121,7 +121,7 @@ $conn->close();
 echo 'CREATED and FILLED tables COMPLETE!!!!';
 $data = '<?php
             $hostname="'.$host.'";
-            $username="'.$usename.'";
+            $username="'.$username.'";
             $password="'.$password.'";
             $db_name="'.$database.'";
             ?>';
