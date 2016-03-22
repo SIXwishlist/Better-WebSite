@@ -15,3 +15,4 @@ before_install:
 script:
     - sh test/test.sh auto
     - bash test/preinst.sh
+    - codeclimate analyze -f php
