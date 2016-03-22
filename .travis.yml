@@ -10,6 +10,8 @@ php:
   - nightly
 before_install:
   - mysql -e "create database IF NOT EXISTS test;" -uroot
+  - curl -L https://github.com/codeclimate/codeclimate/archive/master.tar.gz | tar xvz
+  - cd codeclimate-* && sudo make install
 script:
     - sh test/test.sh auto
     - bash test/preinst.sh
