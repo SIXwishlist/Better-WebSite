@@ -8,6 +8,7 @@
 )
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/profile/dodiaraculus17)
 [![Build Status](https://travis-ci.org/alwaysontop617/Better-WebSite.svg?branch=master)](https://travis-ci.org/alwaysontop617/Better-WebSite)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/e7187f89-9ebb-474f-8720-5a0ec740d313/small.png)](https://insight.sensiolabs.com/projects/e7187f89-9ebb-474f-8720-5a0ec740d313)
 
 Tecflare Poke is a professional webpage system like wordpress.
 
